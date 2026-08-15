@@ -1,16 +1,16 @@
-"""自定义报错渲染：傲娇消息 + 带上下文的源码块。
+"""自定义报错渲染: 傲娇消息 + 带上下文的源码块. 
 
-样式全部由配置文件驱动（见 defaults.toml / tsuntrack.toml 的 [general]）：
+样式全部由配置文件驱动(见 defaults.toml / tsuntrack.toml 的 [general]): 
 - context_lines        报错行上下各显示几行
-- error_line_style     报错行代码样式（如 bold hot_pink / orange1）
-- line_number_style    行号样式（如 dim / grey）
-- [general.syntax]     上下文代码高亮：
-    theme              pygments 内置主题名（monokai/default/emacs/...），留空用 styles 表
-    styles             pygments token 名 → rich 样式（如 "Name.Function" = "#61AFEF"）
+- error_line_style     报错行代码样式(如 bold hot_pink / orange1)
+- line_number_style    行号样式(如 dim / grey)
+- [general.syntax]     上下文代码高亮: 
+    theme              pygments 内置主题名(monokai/default/emacs/...), 留空用 styles 表
+    styles             pygments token 名 → rich 样式(如 "Name.Function" = "#61AFEF")
 
-说明：pygments 主题只取前景色，不会带背景。
-渲染参数统一封装在 :class:`RenderConfig` 中，由
-``RenderConfig.from_config(cfg)`` 从配置构建（默认值以 defaults.toml 为准）。
+说明: pygments 主题只取前景色, 不会带背景. 
+渲染参数统一封装在 :class:`RenderConfig` 中, 由
+``RenderConfig.from_config(cfg)`` 从配置构建(默认值以 defaults.toml 为准).
 """
 
 from __future__ import annotations
@@ -41,7 +41,7 @@ class RenderConfig:
 
     @classmethod
     def from_config(cls, cfg: dict[str, Any]) -> "RenderConfig":
-        """从合并后的配置（含 defaults + 主题 + 用户）构建渲染参数。"""
+        """从合并后的配置(含 defaults + 主题 + 用户)构建渲染参数."""
         general = cfg.get("general") or {}
         syntax = general.get("syntax") or {}
 
@@ -62,7 +62,7 @@ class RenderConfig:
 
 
 def _resolve_token(name: str) -> object:
-    """把 "Name.Function" 这样的字符串解析成 pygments token 对象。"""
+    """把 "Name.Function" 这样的字符串解析成 pygments token 对象."""
     current = Token
     for part in name.split("."):
         current = getattr(current, part)
@@ -70,7 +70,7 @@ def _resolve_token(name: str) -> object:
 
 
 def _is_subtype(token, token_type) -> bool:
-    """判断 token 是否是 token_type 的子类型。"""
+    """判断 token 是否是 token_type 的子类型."""
     current = token
     while current is not None:
         if current is token_type:
@@ -80,10 +80,10 @@ def _is_subtype(token, token_type) -> bool:
 
 
 def _build_token_style(theme: str, styles: dict[str, str] | None):
-    """根据配置构建"token → rich 样式"的函数。
+    """根据配置构建"token → rich 样式"的函数. 
 
-    - theme 非空：使用 pygments 内置主题（只取前景色/粗体/斜体，忽略背景色）
-    - 否则：使用 styles 自定义表
+    - theme 非空: 使用 pygments 内置主题(只取前景色/粗体/斜体, 忽略背景色)
+    - 否则: 使用 styles 自定义表
     """
     if theme:
         try:
@@ -125,11 +125,11 @@ def _build_token_style(theme: str, styles: dict[str, str] | None):
 
 
 def _highlight_python_line(code: str, token_style) -> Text:
-    """把一行 Python 代码按配置的配色方案着色，返回带样式的 Text。"""
+    """把一行 Python 代码按配置的配色方案着色, 返回带样式的 Text."""
     result = Text()
     for token, value in lex(code, _python_lexer):
         if "\n" in value:
-            # pygments 会给单行输入补一个换行 token，每个上下文行后面都会多出一个空行
+            # pygments 会给单行输入补一个换行 token, 每个上下文行后面都会多出一个空行
             value = value.replace("\n", "")
             if not value:
                 continue
@@ -143,7 +143,7 @@ def _render_source_block(
     config: RenderConfig,
     token_style,
 ) -> None:
-    """渲染报错行及其上下 config.context_lines 行，报错行高亮，每行带行号。"""
+    """渲染报错行及其上下 config.context_lines 行, 报错行高亮, 每行带行号."""
     lineno = fs.lineno or 0
     if lineno <= 0:
         return
@@ -159,10 +159,10 @@ def _render_source_block(
         line_text = Text()
         line_text.append(f"{n:>4} │ ", style=config.line_number_style)
         if n == lineno:
-            # 报错行：整行用 error_line_style，突出错误位置
+            # 报错行: 整行用 error_line_style, 突出错误位置
             line_text.append(code, style=config.error_line_style)
         else:
-            # 上下文行：语法高亮
+            # 上下文行: 语法高亮
             line_text.append_text(_highlight_python_line(code, token_style))
         console.print(line_text)
 

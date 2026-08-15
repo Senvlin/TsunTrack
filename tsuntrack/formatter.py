@@ -26,7 +26,7 @@ class _SafeDict(dict[str, Any]):
 
 
 def _safe_str(exc_value: BaseException | None) -> str:
-    """安全地取异常消息文本（个别异常 __str__ 可能抛错）"""
+    """安全地取异常消息文本(个别异常 __str__ 可能抛错)"""
     if exc_value is None:
         return ""
     try:
@@ -36,18 +36,18 @@ def _safe_str(exc_value: BaseException | None) -> str:
 
 
 def _extract_name(exc_type: type[BaseException], exc_value: BaseException) -> str:
-    """提取模板 {name} 使用的名称：NameError 的变量名 / AttributeError 的属性名 /
-    ModuleNotFoundError 的模块名 / KeyError 的键 / OSError 系（FileNotFoundError 等）的文件名。"""
+    """提取模板 {name} 使用的名称: NameError 的变量名 / AttributeError 的属性名 /
+    ModuleNotFoundError 的模块名 / KeyError 的键 / OSError 系(FileNotFoundError 等)的文件名."""
     name = getattr(exc_value, "name", None)
     if name is not None:
         return str(name)
 
-    # OSError 系（FileNotFoundError / PermissionError 等）：filename 是缺失/出问题的文件名
+    # OSError 系(FileNotFoundError / PermissionError 等): filename 是缺失/出问题的文件名
     filename = getattr(exc_value, "filename", None)
     if filename is not None:
         return str(filename)
-    # 单参数构造（如 FileNotFoundError("foo.txt")）时 filename 属性为 None，
-    # 但 args[0] 就是那个文件名（多参数时 args[0] 是 int errno，会被过滤掉）
+    # 单参数构造(如 FileNotFoundError("foo.txt"))时 filename 属性为 None,
+    # 但 args[0] 就是那个文件名(多参数时 args[0] 是 int errno, 会被过滤掉)
     if (
         isinstance(exc_value, OSError)
         and exc_value.args
@@ -86,14 +86,14 @@ def build_context(
 
     ctx["name"] = _extract_name(exc_type, exc_value)
 
-    # OSError 系（FileNotFoundError 等）的文件名，与栈帧路径 {filename} 区分
+    # OSError 系(FileNotFoundError 等)的文件名, 与栈帧路径 {filename} 区分
     exc_filename = getattr(exc_value, "filename", None)
     if exc_filename is None:
         exc_filename = getattr(exc_value, "filename2", None)
     if exc_filename is not None:
         ctx["exc_filename"] = str(exc_filename)
 
-    # 取最内层（离异常最近）的栈帧信息
+    # 取最内层(离异常最近)的栈帧信息
     frame = exc_tb
     while frame is not None and frame.tb_next is not None:
         frame = frame.tb_next
@@ -125,8 +125,8 @@ def format_message(
 ) -> tuple[str, str]:
     """生成 (消息文本, 样式)
 
-    :param cfg: 合并后的配置；为 None 时内部自动加载
-    :param extra: 额外占位符, 会合并进模板上下文（自定义占位符的入口）
+    :param cfg: 合并后的配置; 为 None 时内部自动加载
+    :param extra: 额外占位符, 会合并进模板上下文(自定义占位符的入口)
     """
     if cfg is None:
         cfg = _config.load_config()

@@ -1,4 +1,4 @@
-"""自定义 sys.excepthook：输出傲娇报错文本 + rich 美化堆栈。"""
+"""自定义 sys.excepthook: 输出傲娇报错文本 + rich 美化堆栈."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from . import config as _config
 from . import formatter
 from .renderer import RenderConfig, render
 
-# 这些异常原样交给原始钩子处理，不做美化
+# 这些异常原样交给原始钩子处理, 不做美化
 _PASSTHROUGH_TYPES: tuple[type[BaseException], ...] = (
     SystemExit,
     KeyboardInterrupt,
@@ -22,7 +22,7 @@ _installed = False
 
 
 def install() -> bool:
-    """安装全局异常钩子（幂等）。返回钩子是否处于启用状态。"""
+    """安装全局异常钩子(幂等). 返回钩子是否处于启用状态."""
     global _original_excepthook, _installed
     if _installed:
         return True
@@ -36,7 +36,7 @@ def install() -> bool:
 
 
 def uninstall() -> None:
-    """卸载钩子，恢复安装前的 excepthook。"""
+    """卸载钩子, 恢复安装前的 excepthook."""
     global _original_excepthook, _installed
     if _installed and _original_excepthook is not None:
         sys.excepthook = _original_excepthook
@@ -45,11 +45,11 @@ def uninstall() -> None:
 
 
 def _limit_traceback(tb, max_frames: int | None):
-    """保留最内层（离异常最近）的 max_frames 帧，返回新的回溯链头。
+    """保留最内层(离异常最近)的 max_frames 帧, 返回新的回溯链头. 
 
-    需要手动修剪的原因：rich 15 的 max_frames 语义是"保留栈顶一半 + 栈底一半、
-    隐藏中间"，且强制最少 4 帧；而配置里 max_frames 的语义是"最多显示 N 层、
-    保留最内层"，两者不一致。
+    需要手动修剪的原因: rich 15 的 max_frames 语义是"保留栈顶一半 + 栈底一半、
+    隐藏中间", 且强制最少 4 帧; 而配置里 max_frames 的语义是"最多显示 N 层、
+    保留最内层", 两者不一致. 
     """
     if max_frames is None or max_frames <= 0:
         return tb
@@ -74,7 +74,7 @@ def tsuntrack_excepthook(
     exc_value: BaseException,
     exc_tb,
 ) -> None:
-    """自定义 excepthook：打印傲娇消息 + rich 美化堆栈。"""
+    """自定义 excepthook: 打印傲娇消息 + rich 美化堆栈."""
     original = (
         _original_excepthook if _original_excepthook is not None else sys.__excepthook__
     )
@@ -85,14 +85,14 @@ def tsuntrack_excepthook(
         cfg = _config.load_config()
         message, style = formatter.format_message(exc_type, exc_value, exc_tb, cfg)
 
-        # 渲染参数统一从配置聚合（defaults.toml 为权威默认源）
+        # 渲染参数统一从配置聚合(defaults.toml 为权威默认源)
         config: RenderConfig = RenderConfig.from_config(cfg)
 
-        # rich 延迟导入：只有真正报错时才付出 import 成本
+        # rich 延迟导入: 只有真正报错时才付出 import 成本
         from rich.console import Console
 
         console = Console(stderr=True)
-        # 先按"保留最内层 N 帧"修剪回溯链（max_frames<=0 表示不限制）
+        # 先按"保留最内层 N 帧"修剪回溯链(max_frames<=0 表示不限制)
         tb_for_render = _limit_traceback(exc_tb, config.max_frames)
         render(console, exc_type, exc_value, tb_for_render, message, style, config)
     except Exception:

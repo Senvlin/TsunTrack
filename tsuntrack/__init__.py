@@ -27,7 +27,7 @@ def install() -> bool:
 
 
 def uninstall() -> None:
-    """卸载全局异常钩子，恢复安装前的行为。"""
+    """卸载全局异常钩子, 恢复安装前的行为."""
     from .handler import uninstall as _uninstall
 
     _uninstall()
