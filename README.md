@@ -28,16 +28,10 @@
 > 只想要报错美化？把theme字段改成空字符串就能体验了
 ## 安装
 
-要求 Python 3.11+. 使用 uv: 
+要求 Python 3.11+. 使用 pip: 
 
 ```powershell
-uv sync
-```
-
-或使用 pip: 
-
-```powershell
-python -m pip install .
+pip install tsuntrack
 ```
 
 安装后无需任何 import——随便跑一个会报错的脚本, 看看效果吧: 
