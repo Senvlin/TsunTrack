@@ -83,7 +83,14 @@ def tsuntrack_excepthook(
 
     try:
         cfg = _config.load_config()
-        message = formatter.format_message(exc_type, exc_value, exc_tb, cfg)
+        # defaults.toml 不内置extra段, 使用者按需在自己的配置里添加
+        message = formatter.format_message(
+            exc_type,
+            exc_value,
+            exc_tb,
+            cfg,
+            extra=cfg.get("extra") or {},
+        )
 
         config: RenderConfig = RenderConfig.from_config(cfg)
 
@@ -93,7 +100,7 @@ def tsuntrack_excepthook(
         console = Console(stderr=True)
         # 先按"保留最内层 N 帧"修剪回溯链(max_frames<=0 表示不限制)
         tb_for_render = _limit_traceback(exc_tb, config.max_frames)
-        # 智能提示（pip install / did you mean 等），没有合适提示时为 None
+        # 智能提示, 没有合适提示时为 None
         hint = hints.build_hint(exc_type, exc_value, exc_tb, cfg)
         render(console, exc_type, exc_value, tb_for_render, message, config, hint)
     except Exception:

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from typing import Any
+from typing import Any, TypedDict, cast
 
 from . import config as _config
 
@@ -21,8 +21,24 @@ _NAME_FROM_MESSAGE = [
 class _SafeDict(dict[str, Any]):
     """模板里出现未知占位符时原样保留, 而不是抛 KeyError"""
 
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        # 显式 __init__: 避免类型检查器对"继承 dict.__init__ 重载"的匹配报错
+        # (TypedDict 参数在 pyright 下无法匹配 dict.__init__ 的 mapping 重载)
+        super().__init__(*args, **kwargs)
+
     def __missing__(self, key: str) -> str:
         return "{" + key + "}"
+
+
+class ExceptionContext(TypedDict):
+    exc_type: str
+    message: str
+    name: str
+    exc_filename: str
+    filename: str
+    lineno: int
+    func_name: str
+    module: str
 
 
 def _safe_str(exc_value: BaseException | None) -> str:
@@ -71,9 +87,9 @@ def build_context(
     exc_type: type[BaseException],
     exc_value: BaseException,
     exc_tb,
-) -> dict[str, Any]:
+) -> ExceptionContext:
     """从异常对象与回溯对象中提取模板可用的全部字段"""
-    ctx: dict[str, Any] = {
+    ctx: ExceptionContext = {
         "exc_type": getattr(exc_type, "__name__", str(exc_type)),
         "message": _safe_str(exc_value),
         "name": "",
@@ -134,7 +150,9 @@ def format_message(
     exc_cfg = resolve_exception_config(cfg, exc_name)
     template = exc_cfg.get("template") or DEFAULT_TEMPLATE
 
-    ctx = build_context(exc_type, exc_value, exc_tb)
+    ctx: dict[str, Any] = cast(
+        dict[str, Any], build_context(exc_type, exc_value, exc_tb)
+    )
     if extra:
         ctx.update(extra)
     message = template.format_map(_SafeDict(ctx))
