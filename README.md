@@ -10,30 +10,12 @@
 
 未安装 / 关闭时: 
 
-```
-Traceback (most recent call last):
-  File "C:\demo\app.py", line 8, in <module>
-    level_1()
-  ...
-NameError: name 'some_undefined_name' is not defined
-```
+<img width="907" height="211" alt="zzz" src="https://github.com/user-attachments/assets/7307dcf1-858f-4541-b502-b852a5badb9d" />
+
 安装并启用后: 
 
-```python
-C:\demo\app.py:16 in <module>
-  15 │ if __name__ == "__main__":
-  16 │     
-C:\demo\app.py:12 in level_1
-  11 │ def level_1():
-  12 │     return level_2()
-  13 │ 
-C:\demo\app.py:8 in level_2
-   7 │ def level_2():
-   8 │     return some_undefined_name
-   9 │ 
+<img width="783" height="271" alt="z'z" src="https://github.com/user-attachments/assets/a7bf6cb8-3fbf-4083-bf17-f781014859fb" />
 
-NameError: 小笨蛋, 才, 才不会告诉你这个"some_undefined_name"没定义呢, 哼╯^╰
-```
 
 ## 特性
 
