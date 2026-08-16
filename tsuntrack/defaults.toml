@@ -1,6 +1,6 @@
 [general]
 enabled = true
-theme = "傲娇"
+theme = "tsuntere"
 show_locals = true
 max_frames = 5
 context_lines = 1
@@ -10,97 +10,96 @@ line_number_style = "dim"
 # 上下文代码高亮:
 # - theme: pygments 内置主题名(如 monokai / default / emacs / friendly / tango),
 # - styles: pygments token 名 → rich 样式. token 名如 Keyword / Name.Function / String.Doc.
+
 [general.syntax]
 theme = "monokai"
 
 [exceptions.default]
 template = '{message}'
-style = "red"
 
-[theme."傲娇".exceptions.NameError]
-template = '小笨蛋, 才, 才不会告诉你这个"{name}"没定义呢, 哼╯^╰'
-style = "bold red"
+[theme."tsuntere".exceptions.NameError]
+template = '小笨蛋, 才, 才不会告诉你这个 [green]{name}[/green] 没定义呢, 哼╯^╰'
 
-[theme."傲娇".exceptions.TypeError]
+[theme."tsuntere".exceptions.TypeError]
 template = '笨蛋! 类型不对啦! {message}'
 
-[theme."傲娇".exceptions.ValueError]
+[theme."tsuntere".exceptions.ValueError]
 template = '呜... 这个值人家才不会接受呢, {message}'
 
-[theme."傲娇".exceptions.ZeroDivisionError]
+[theme."tsuntere".exceptions.ZeroDivisionError]
 template = '哼! 居然想除以零? 人家才不会让你得逞!'
 
-[theme."傲娇".exceptions.KeyError]
-template = '才, 才没有这个键呢! "{name}"什么的, 最讨厌了!'
+[theme."tsuntere".exceptions.KeyError]
+template = '才, 才没有这个键呢! [green]{name}[/green] 什么的, 最讨厌了!'
 
-[theme."傲娇".exceptions.IndexError]
+[theme."tsuntere".exceptions.IndexError]
 template = '笨蛋! 索引超出范围了啦, 你都不会数数的吗?'
 
-[theme."傲娇".exceptions.AttributeError]
+[theme."tsuntere".exceptions.AttributeError]
 template = '哼, 这个对象才没有"{name}"这种属性呢, 别乱来!'
 
-[theme."傲娇".exceptions.FileNotFoundError]
+[theme."tsuntere".exceptions.FileNotFoundError]
 template = '文件... 文件 [green]{exc_filename}[/green] 不见了啦! 才不是我没找到, 是它自己藏起来了! '
 
-[theme."傲娇".exceptions.ImportError]
-template = '呜... 导入失败了, 这个模块一定在傲娇, 不肯出来! {message}'
+[theme."tsuntere".exceptions.ImportError]
+template = '呜... 导入失败了, 这个模块一定在tsuntere, 不肯出来! {message}'
 
-[theme."傲娇".exceptions.ModuleNotFoundError]
+[theme."tsuntere".exceptions.ModuleNotFoundError]
 template = '笨蛋! 找不到"{name}"这个模块啦, 你是不是没安装?'
 
-[theme."傲娇".exceptions.StopIteration]
+[theme."tsuntere".exceptions.StopIteration]
 template = '已经... 没有下一个了啦, 不要再逼人家了!'
 
-[theme."傲娇".exceptions.AssertionError]
+[theme."tsuntere".exceptions.AssertionError]
 template = '断言失败了... 人家才没有错, 一定是你的条件有问题!'
 
-[theme."傲娇".exceptions.IndentationError]
+[theme."tsuntere".exceptions.IndentationError]
 template = '缩进都乱掉了啦! 笨蛋, 好好对齐代码不行吗?'
 
-[theme."傲娇".exceptions.SyntaxError]
+[theme."tsuntere".exceptions.SyntaxError]
 template = '语法错误! 你写的是什么外星代码啊, 人家完全看不懂!'
 
-[theme."傲娇".exceptions.OverflowError]
+[theme."tsuntere".exceptions.OverflowError]
 template = '数字太大啦, 都溢出来了, 你是在挑战人家的极限吗?'
 
-[theme."傲娇".exceptions.RecursionError]
+[theme."tsuntere".exceptions.RecursionError]
 template = '递归太深了啦, 人家才不要陪你无限循环下去!'
 
-[theme."傲娇".exceptions.MemoryError]
+[theme."tsuntere".exceptions.MemoryError]
 template = '内存不够用了... 都怪你弄出这么多东西, 哼!'
 
-[theme."傲娇".exceptions.PermissionError]
+[theme."tsuntere".exceptions.PermissionError]
 template = '哼, 你没有权限做这个操作啦, 才不是人家不让你做!'
 
-[theme."傲娇".exceptions.IsADirectoryError]
+[theme."tsuntere".exceptions.IsADirectoryError]
 template = '笨蛋! 这是一个目录啦, 你把它当文件用?'
 
-[theme."傲娇".exceptions.NotADirectoryError]
+[theme."tsuntere".exceptions.NotADirectoryError]
 template = '这不是目录啦, 你搞错了吧!'
 
-[theme."傲娇".exceptions.ConnectionError]
-template = '连接失败了... 一定是网络在傲娇, 才不是我的问题!'
+[theme."tsuntere".exceptions.ConnectionError]
+template = '连接失败了... 一定是网络在tsuntere, 才不是我的问题!'
 
-[theme."傲娇".exceptions.TimeoutError]
+[theme."tsuntere".exceptions.TimeoutError]
 template = '等了好久都没响应, 人家不干了啦! {message}'
 
-[theme."傲娇".exceptions.RuntimeError]
+[theme."tsuntere".exceptions.RuntimeError]
 template = '运行时出错了... 哼, 反正不是我的错! {message}'
 
-[theme."傲娇".exceptions.NotImplementedError]
+[theme."tsuntere".exceptions.NotImplementedError]
 template = '这个功能还没实现啦, 你居然想用? 真是的!'
 
-[theme."傲娇".exceptions.OSError]
+[theme."tsuntere".exceptions.OSError]
 template = '系统出错了... 都是系统的错, 才不是我的问题! {message}'
 
-[theme."傲娇".exceptions.EOFError]
+[theme."tsuntere".exceptions.EOFError]
 template = '已经读到底了啦, 没有更多内容了, 笨蛋!'
 
-[theme."傲娇".exceptions.KeyboardInterrupt]
+[theme."tsuntere".exceptions.KeyboardInterrupt]
 template = '哼, 你居然打断人家! 不跟你好了!'
 
-[theme."傲娇".exceptions.SystemExit]
+[theme."tsuntere".exceptions.SystemExit]
 template = '程序要退出了啦, 拜拜!'
 
-[theme."傲娇".exceptions.default]
+[theme."tsuntere".exceptions.default]
 template = '呜... 出错了, 是 {message}, 人家才不想告诉你呢!'

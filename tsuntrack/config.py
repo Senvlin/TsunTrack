@@ -1,24 +1,19 @@
-"""配置加载与合并. 
+"""配置加载与合并
 
-查找顺序(优先级从高到低): 
+查找顺序(优先级从高到低):
 
 1. 环境变量 ``TSUNTRACK_CONFIG`` 指定的路径
 2. 当前工作目录下的 ``tsuntrack.toml``
 3. 用户主目录 ``~/.config/tsuntrack/config.toml``
 4. 包内置 ``defaults.toml``
 
-合并规则(三层, 从低到高): 
+合并规则(三层, 从低到高):
 
 - 基础配置: defaults.toml 中除 ``[theme.*]`` 之外的内容(所有主题共用)
 - 主题覆盖: 按 ``[general] theme`` 选中的 ``[theme."主题名".*]`` 覆盖基础配置
 - 用户配置: 用户文件最后合并, 可以覆盖上面的任何内容
 
-因此用户可以: 
-1. 直接覆盖 ``[exceptions.NameError]`` 等任意配置(用户 > 主题 > 基础)
-2. 通过 ``[general] theme = "xxx"`` 一键切换内置主题
-3. 在用户文件里新增自己的 ``[theme."我的主题".*]`` 自定义主题
-
-结果会被缓存, 修改配置文件后调用 :func:`reload_config` 重新读取.
+结果会被缓存, 修改配置文件后调用 :func:`reload_config` 重新读取
 """
 
 from __future__ import annotations
@@ -54,7 +49,7 @@ def _candidates() -> list[Path]:
             paths.append(env_path)
         else:
             print(
-                f"TsunTrack: 环境变量 {ENV_VAR} 指向的文件不存在：{env_path}，已忽略。",
+                f"TsunTrack: 环境变量 {ENV_VAR} 指向的文件不存在：{env_path}，已忽略",
                 file=sys.stderr,
             )
     paths.append(Path.cwd() / CWD_FILE)
@@ -74,12 +69,12 @@ def _deep_merge(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any
 
 
 def _without_theme(cfg: dict[str, Any]) -> dict[str, Any]:
-    """去掉配置里的 ``theme`` 主题容器键(运行时不需要它)."""
+    """去掉配置里的 ``theme`` 主题容器键(运行时不需要它)"""
     return {k: v for k, v in cfg.items() if k != "theme"}
 
 
 def load_config(use_cache: bool = True) -> dict[str, Any]:
-    """加载配置: 基础层 + 主题覆盖层 + 用户配置层, 返回合并结果. 
+    """加载配置: 基础层 + 主题覆盖层 + 用户配置层, 返回合并结果
 
     :param use_cache: 是否使用模块级缓存(默认使用)
     """
