@@ -1,4 +1,4 @@
-# TsunTrack
+<img width="909" height="271" alt="image" src="https://github.com/user-attachments/assets/f7715470-8f44-49de-9cd5-cb7cf7c3312b" /># TsunTrack
 
 > 让 Python 的报错变得**傲娇**起来～
 
@@ -14,9 +14,7 @@
 
 安装并启用后: 
 
-<img width="918" height="271" alt="PixPin_2026-08-16_22-33-18" src="https://github.com/user-attachments/assets/ec4e79bb-bcb4-46aa-8b1f-e22fae36c514" />
-
-
+<img width="909" height="271" alt="image" src="https://github.com/user-attachments/assets/4acd8f2b-bb24-4956-8b19-a83dca7c8acd" />
 
 ## 特性
 
