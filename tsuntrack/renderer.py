@@ -34,6 +34,8 @@ class RenderConfig:
     syntax_theme: str = ""
     syntax_styles: dict[str, str] | None = None
     max_frames: int = 5
+    hint_label: str = "Hint"
+    hint_style: str = "bold orange1"
 
     @classmethod
     def from_config(cls, cfg: dict[str, Any]) -> "RenderConfig":
@@ -54,6 +56,8 @@ class RenderConfig:
             syntax_theme=syntax.get("theme", "") or "",
             syntax_styles=syntax.get("styles") or {},
             max_frames=_int("max_frames", cls.max_frames),
+            hint_label=general.get("hint_label") or cls.hint_label,
+            hint_style=general.get("hint_style") or cls.hint_style,
         )
 
 
@@ -169,6 +173,7 @@ def render(
     message: str,
     style: str,
     config: RenderConfig,
+    hint: str | None = None,
 ):
     frames: list[traceback.FrameSummary] = list(traceback.extract_tb(tb))[
         -config.max_frames :
@@ -184,3 +189,9 @@ def render(
     console.print(
         f"\n[bold red]{exc_type.__name__}[/bold red]: {Text(message, style=style)}"
     )
+    if hint:
+        # 提示行: "Hint: 提示内容"，markup 安全（用 Text 拼接，不解析模板里的 [ ]）
+        hint_text = Text()
+        hint_text.append(f"{config.hint_label}: ", style=config.hint_style)
+        hint_text.append(hint)
+        console.print(hint_text)

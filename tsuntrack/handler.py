@@ -8,6 +8,7 @@ from typing import Any
 
 from . import config as _config
 from . import formatter
+from . import hints
 from .renderer import RenderConfig, render
 
 # 这些异常原样交给原始钩子处理, 不做美化
@@ -93,7 +94,9 @@ def tsuntrack_excepthook(
         console = Console(stderr=True)
         # 先按"保留最内层 N 帧"修剪回溯链(max_frames<=0 表示不限制)
         tb_for_render = _limit_traceback(exc_tb, config.max_frames)
-        render(console, exc_type, exc_value, tb_for_render, message, style, config)
+        # 智能提示（pip install / did you mean 等），没有合适提示时为 None
+        hint = hints.build_hint(exc_type, exc_value, exc_tb, cfg)
+        render(console, exc_type, exc_value, tb_for_render, message, style, config, hint)
     except Exception:
         try:
             sys.__excepthook__(exc_type, exc_value, exc_tb)

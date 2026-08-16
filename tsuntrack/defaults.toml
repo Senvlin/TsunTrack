@@ -6,6 +6,9 @@ max_frames = 5
 context_lines = 1
 error_line_style = "bold red"
 line_number_style = "dim"
+show_hints = true
+hint_label = "Hint"
+hint_style = "bold orange1"
 
 # 上下文代码高亮:
 # - theme: pygments 内置主题名(如 monokai / default / emacs / friendly / tango),
@@ -14,14 +17,74 @@ line_number_style = "dim"
 [general.syntax]
 theme = "monokai"
 
+[general.syntax.styles] # 以One Dark Pro举例, 实际上theme已经内置了（
+"Comment.Special" = "bold #5C6370"
+"Comment" = "#5C6370"
+"String.Doc" = "italic #5C6370"
+"String" = "#98C379"
+"Number" = "#D19A66"
+"Name.Function" = "#61AFEF"
+"Name.Decorator" = "#61AFEF"
+"Name.Class" = "#E5C07B"
+"Name.Builtin" = "#E06C75"
+"Name.Constant" = "#D19A66"
+"Name.Attribute" = "#E06C75"
+"Name.Tag" = "#E06C75"
+"Name" = "#ABB2BF"
+"Keyword.Namespace" = "#C678DD"
+"Keyword.Type" = "#E5C07B"
+"Keyword" = "bold #C678DD"
+"Operator.Word" = "#C678DD"
+"Operator" = "#56B6C2"
+"Punctuation" = "#ABB2BF"
+"Generic.Error" = "#E06C75"
+
 [exceptions.default]
 template = '{message}'
+
+[hints.ModuleNotFoundError]
+template = '模块 [green]{name}[/green] 未安装, 试试: [green]pip install {pip_name}[/green]'
+
+[hints.ImportError]
+template = '导入失败: 试试 [green]pip install {pip_name}[/green]'
+
+[hints.NameError]
+template = '变量 [green]{name}[/green] 未定义, 你是不是想写 [green]{did_you_mean}[/green]?'
+
+[hints.AttributeError]
+template = '对象没有 [green]{name}[/green] 属性, 你是不是想写 [green]{did_you_mean}[/green]?'
+
+[hints.TimeoutError]
+template = '{message}'
+
+[hints.RuntimeError]
+template = '{message}'
+
+[hints.OSError]
+template = '{message}'
+
+[hints.SyntaxError]
+template = '{message}'
+
+[hints.TypeError]
+template = '{message}'
+
+[hints.AssertionError]
+template = '{message}'
+
+# import 名 ≠ pip 包名的映射（import PIL 但要 pip install pillow）
+[hints.aliases]
+PIL = "pillow"
+cv2 = "opencv-python"
+sklearn = "scikit-learn"
+yaml = "pyyaml"
+bs4 = "beautifulsoup4"
 
 [theme."tsuntere".exceptions.NameError]
 template = '小笨蛋, 才, 才不会告诉你这个 [green]{name}[/green] 没定义呢, 哼╯^╰'
 
 [theme."tsuntere".exceptions.TypeError]
-template = '笨蛋! 类型不对啦! {message}'
+template = '笨蛋! 类型不对啦!'
 
 [theme."tsuntere".exceptions.ValueError]
 template = '呜... 这个值人家才不会接受呢, {message}'
@@ -30,22 +93,22 @@ template = '呜... 这个值人家才不会接受呢, {message}'
 template = '哼! 居然想除以零? 人家才不会让你得逞!'
 
 [theme."tsuntere".exceptions.KeyError]
-template = '才, 才没有这个键呢! [green]{name}[/green] 什么的, 最讨厌了!'
+template = '才, 才没有 [green]{name}[/green] 这个键呢! [green]{name}[/green] 什么的, 最讨厌了!'
 
 [theme."tsuntere".exceptions.IndexError]
 template = '笨蛋! 索引超出范围了啦, 你都不会数数的吗?'
 
 [theme."tsuntere".exceptions.AttributeError]
-template = '哼, 这个对象才没有"{name}"这种属性呢, 别乱来!'
+template = '哼, 这个对象才没有 [green]{name}[/green] 这种属性呢, 别乱来!'
 
 [theme."tsuntere".exceptions.FileNotFoundError]
-template = '文件... 文件 [green]{exc_filename}[/green] 不见了啦! 才不是我没找到, 是它自己藏起来了! '
+template = '文件... 文件 [green]{exc_filename}[/green] 不见了啦! 才不是我没找到, 是它自己藏起来了!'
 
 [theme."tsuntere".exceptions.ImportError]
-template = '呜... 导入失败了, 这个模块一定在tsuntere, 不肯出来! {message}'
+template = '呜... [green]{name}[/green] 导入失败了, 肯定是这个模块在害羞, 不肯出来!'
 
 [theme."tsuntere".exceptions.ModuleNotFoundError]
-template = '笨蛋! 找不到"{name}"这个模块啦, 你是不是没安装?'
+template = '笨蛋! 找不到 [green]{name}[/green] 这个模块啦, 你是不是没安装?'
 
 [theme."tsuntere".exceptions.StopIteration]
 template = '已经... 没有下一个了啦, 不要再逼人家了!'
@@ -72,25 +135,25 @@ template = '内存不够用了... 都怪你弄出这么多东西, 哼!'
 template = '哼, 你没有权限做这个操作啦, 才不是人家不让你做!'
 
 [theme."tsuntere".exceptions.IsADirectoryError]
-template = '笨蛋! 这是一个目录啦, 你把它当文件用?'
+template = '笨蛋! 这是一个目录啦, 难道你把它当文件用嘛?'
 
 [theme."tsuntere".exceptions.NotADirectoryError]
 template = '这不是目录啦, 你搞错了吧!'
 
 [theme."tsuntere".exceptions.ConnectionError]
-template = '连接失败了... 一定是网络在tsuntere, 才不是我的问题!'
+template = '连接失败了... 一定是网络在捣乱, 才不是我的问题!'
 
 [theme."tsuntere".exceptions.TimeoutError]
-template = '等了好久都没响应, 人家不干了啦! {message}'
+template = '等了好久都没响应, 人家不干了啦!'
 
 [theme."tsuntere".exceptions.RuntimeError]
-template = '运行时出错了... 哼, 反正不是我的错! {message}'
+template = '运行时出错了... 哼, 反正不是我的错!'
 
 [theme."tsuntere".exceptions.NotImplementedError]
 template = '这个功能还没实现啦, 你居然想用? 真是的!'
 
 [theme."tsuntere".exceptions.OSError]
-template = '系统出错了... 都是系统的错, 才不是我的问题! {message}'
+template = '系统出错了... 都是系统的错, 才不是我的问题!'
 
 [theme."tsuntere".exceptions.EOFError]
 template = '已经读到底了啦, 没有更多内容了, 笨蛋!'
