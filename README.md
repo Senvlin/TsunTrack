@@ -1,4 +1,4 @@
-<img width="909" height="271" alt="image" src="https://github.com/user-attachments/assets/f7715470-8f44-49de-9cd5-cb7cf7c3312b" /># TsunTrack
+# TsunTrack
 
 > 让 Python 的报错变得**傲娇**起来～
 
