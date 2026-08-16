@@ -113,7 +113,6 @@ def test_build_context_with_traceback():
     assert ctx["lineno"] > 0
     assert ctx["func_name"] == "_raise_value_error"
     assert ctx["module"] == "test_formatter"
-    assert ctx["exc_filename"] == ""
 
 
 def test_build_context_without_traceback():
@@ -127,21 +126,13 @@ def test_build_context_without_traceback():
     assert ctx["module"] == ""
 
 
-def test_build_context_fills_oserror_exc_filename():
+def test_build_context_oserror_filename_goes_to_name():
+    # 缺失文件名统一走 {name}, 不再有独立的 exc_filename 占位符
     exc = FileNotFoundError(2, "No such file or directory", "foo.txt")
 
     ctx = build_context(OSError, exc, None)
 
-    assert ctx["exc_filename"] == "foo.txt"
-
-
-def test_build_context_falls_back_to_filename2():
-    exc = OSError("some error")
-    exc.filename2 = "second.txt"
-
-    ctx = build_context(OSError, exc, None)
-
-    assert ctx["exc_filename"] == "second.txt"
+    assert ctx["name"] == "foo.txt"
 
 
 

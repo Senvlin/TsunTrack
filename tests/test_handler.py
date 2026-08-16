@@ -5,63 +5,7 @@ import sys
 
 import tsuntrack.handler as handler
 from tsuntrack import config as _config
-from tsuntrack.handler import _limit_traceback
-
-
-def _level1() -> None:
-    _level2()
-
-
-def _level2() -> None:
-    raise ValueError("boom")
-
-
-def _get_traceback():
-    try:
-        _level1()
-    except ValueError as exc:
-        return exc.__traceback__
-
-
-def _tb_frame_names(tb) -> list[str]:
-    names = []
-    current = tb
-    while current is not None:
-        names.append(current.tb_frame.f_code.co_name)
-        current = current.tb_next
-    return names
-
-
-def test_limit_traceback_returns_same_for_none_or_non_positive():
-    tb = _get_traceback()
-
-    assert _limit_traceback(tb, None) is tb
-    assert _limit_traceback(tb, 0) is tb
-    assert _limit_traceback(tb, -1) is tb
-
-
-def test_limit_traceback_returns_same_when_within_limit():
-    tb = _get_traceback()
-
-    assert _limit_traceback(tb, 100) is tb
-
-
-def test_limit_traceback_keeps_innermost_frames():
-    tb = _get_traceback()
-    names = _tb_frame_names(tb)
-
-    limited = _limit_traceback(tb, 1)
-
-    assert _tb_frame_names(limited) == names[-1:]
-
-
-def test_limit_traceback_keeps_multiple_innermost_frames():
-    tb = _get_traceback()
-    names = _tb_frame_names(tb)
-
-    limited = _limit_traceback(tb, 2)
-
-    assert _tb_frame_names(limited) == names[-2:]
+from tsuntrack import renderer as renderer_module
 
 
 
@@ -131,7 +75,7 @@ def test_tsuntrack_excepthook_renders_normal_exception(monkeypatch):
         },
     )
     monkeypatch.setattr(
-        handler,
+        renderer_module,
         "render",
         lambda *args, **kwargs: render_calls.append((args, kwargs)),
     )
@@ -159,7 +103,7 @@ def test_tsuntrack_excepthook_falls_back_when_render_fails(monkeypatch):
         },
     )
     monkeypatch.setattr(
-        handler,
+        renderer_module,
         "render",
         lambda *args, **kwargs: (_ for _ in ()).throw(RuntimeError("render boom")),
     )
@@ -188,7 +132,7 @@ def test_tsuntrack_excepthook_swallows_fallback_errors(monkeypatch):
         },
     )
     monkeypatch.setattr(
-        handler,
+        renderer_module,
         "render",
         lambda *args, **kwargs: (_ for _ in ()).throw(RuntimeError("render boom")),
     )

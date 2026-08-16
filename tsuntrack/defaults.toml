@@ -1,6 +1,6 @@
 [general]
 enabled = true
-theme = "neko"
+theme = "tsuntere"
 show_locals = true
 max_frames = 5
 context_lines = 1

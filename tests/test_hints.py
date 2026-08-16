@@ -6,7 +6,7 @@ from tsuntrack.hints import _did_you_mean, _pip_name, build_hint
 
 
 def _raise_name_error() -> None:
-    value = 42
+    value = 42  # noqa: F841 - 故意定义相近变量, 让 did_you_mean 建议它
     return val  # noqa: F821
 
 

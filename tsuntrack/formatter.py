@@ -106,8 +106,6 @@ def build_context(
     }
 
     ctx["name"] = _extract_name(exc_type, exc_value)
-    # 注意: 缺失文件的文件名统一走 {name}(_extract_name 的 OSError 分支),
-    # 不再提供独立的 exc_filename 占位符, 避免两个占位符含义重叠造成困惑
 
     # 取最内层(离异常最近)的栈帧信息
     frame = exc_tb

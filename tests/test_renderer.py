@@ -137,7 +137,6 @@ def test_build_token_style_skips_lowercase_invalid_style_names():
     assert token_style(Token.Name) == ""
 
 
-
 def test_build_token_style_accepts_theme():
     token_style = _build_token_style("monokai", {})
 
@@ -157,12 +156,13 @@ def test_build_token_style_theme_applies_bold_italic_and_color(monkeypatch):
         def style_for_token(self, token):
             return {"bold": True, "italic": True, "color": "ff0000"}
 
-    monkeypatch.setattr(renderer_module, "get_style_by_name", lambda name: _FakeStyle())
+    monkeypatch.setattr(
+        renderer_module, "get_style_by_name", lambda name: _FakeStyle()
+    )
 
     token_style = _build_token_style("fake-theme", {})
 
     assert token_style(Token.Keyword) == "bold italic #ff0000"
-
 
 
 def test_highlight_python_line_returns_same_plain_text_without_newline():
@@ -192,8 +192,6 @@ def test_render_source_block_returns_early_when_no_lines():
     assert output.getvalue() == ""
 
 
-
-
 def test_render_prints_message_and_hint():
     output = StringIO()
     console = Console(file=output, force_terminal=False, width=120)
@@ -213,3 +211,46 @@ def test_render_prints_message_and_hint():
     assert "自定义消息" in text
     assert "Hint: 提示内容" in text
     assert "test_renderer.py" in text
+
+
+def test_render_outputs_ansi_styles_not_literal_markup():
+    output = StringIO()
+    console = Console(
+        file=output,
+        force_terminal=True,
+        color_system="truecolor",
+        width=120,
+        record=True,
+    )
+    tb = _get_traceback()
+
+    render(
+        console,
+        ValueError,
+        ValueError("boom"),
+        tb,
+        "自定义消息",
+        RenderConfig(),
+        hint="提示内容",
+    )
+
+    text = output.getvalue()
+    assert "\x1b[" in text
+    assert "[bold red]" not in text
+    assert "[/bold red]" not in text
+
+    # ANSI 样式码会插在 “Hint” 这类带样式的文本中间，
+    # 所以子串断言用去样式后的纯文本。
+    plain = console.export_text(styles=False, clear=False)
+    assert "自定义消息" in plain
+    assert "Hint: 提示内容" in plain
+
+    styled = console.export_text(styles=True, clear=False)
+    assert "\x1b[" in styled
+
+
+def test_highlight_python_line_applies_styles():
+    text = _highlight_python_line("x = 1", lambda token: "bold red")
+
+    assert text.plain == "x = 1"
+    assert any(span.style == "bold red" for span in text.spans)

@@ -170,9 +170,9 @@ def render(
     config: RenderConfig,
     hint: str | None = None,
 ):
-    frames: list[traceback.FrameSummary] = list(traceback.extract_tb(tb))[
-        -config.max_frames :
-    ]
+    frames = list(traceback.extract_tb(tb))
+    if config.max_frames > 0:
+        frames = frames[-config.max_frames:]
     token_style = _build_token_style(config.syntax_theme, config.syntax_styles)
     for fs in frames:
         console.print(
