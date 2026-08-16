@@ -1,0 +1,3 @@
+# TsunTrack auto-enable: installs the tsundere exception hook at interpreter startup.
+# This line is executed by the site module, so no explicit import is needed.
+import tsuntrack.sitecustomize

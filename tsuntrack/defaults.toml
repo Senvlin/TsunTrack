@@ -1,23 +1,16 @@
 [general]
 enabled = true
-theme = "tsuntere"
-show_locals = true
+theme = ""
 max_frames = 5
 context_lines = 1
 error_line_style = "bold red"
 line_number_style = "dim"
 show_hints = true
 
-# 上下文代码高亮:
-# - theme: pygments 内置主题名(如 monokai / default / emacs / friendly / tango),
-# - styles: pygments token 名 → rich 样式. token 名如 Keyword / Name.Function / String.Doc.
-
 [general.syntax]
 theme = "monokai"
 
 [general.syntax.styles] 
-# 以One Dark Pro举例, 实际上theme已经内置了（
-# 以下键值对的键值需要写Pygment自带的Token，自创的会默认不显示，
 "Comment.Special" = "bold #5C6370"
 "Comment" = "#5C6370"
 "String.Doc" = "italic #5C6370"
@@ -54,27 +47,6 @@ template = '变量 [green]{name}[/green] 未定义, 你是不是想写 [green]{d
 [hints.AttributeError]
 template = '对象没有 [green]{name}[/green] 属性, 你是不是想写 [green]{did_you_mean}[/green]?'
 
-[hints.TimeoutError]
-template = '{message}'
-
-[hints.RuntimeError]
-template = '{message}'
-
-[hints.OSError]
-template = '{message}'
-
-[hints.SyntaxError]
-template = '{message}'
-
-[hints.TypeError]
-template = '{message}'
-
-[hints.ValueError]
-template = '{message}'
-
-[hints.AssertionError]
-template = '{message}'
-
 # import 名 ≠ pip 包名的映射（import PIL 但要 pip install pillow）
 [hints.aliases]
 PIL = "pillow"
@@ -83,91 +55,91 @@ sklearn = "scikit-learn"
 yaml = "pyyaml"
 bs4 = "beautifulsoup4"
 
-[theme."tsuntere".exceptions.NameError]
+[theme."tsundere".exceptions.NameError]
 template = '小笨蛋, 才, 才不会告诉你这个 [green]{name}[/green] 没定义呢, 哼╯^╰'
 
-[theme."tsuntere".exceptions.TypeError]
-template = '笨蛋! 类型不对啦!'
+[theme."tsundere".exceptions.TypeError]
+template = '笨蛋! 类型不对啦! {message}'
 
-[theme."tsuntere".exceptions.ValueError]
-template = '呜... 这个值人家才不会接受呢'
+[theme."tsundere".exceptions.ValueError]
+template = '呜... 这个值人家才不会接受呢 {message}'
 
-[theme."tsuntere".exceptions.ZeroDivisionError]
+[theme."tsundere".exceptions.ZeroDivisionError]
 template = '哼! 居然想除以零? 人家才不会让你得逞!'
 
-[theme."tsuntere".exceptions.KeyError]
+[theme."tsundere".exceptions.KeyError]
 template = '才, 才没有 [green]{name}[/green] 这个键呢! [green]{name}[/green] 什么的, 最讨厌了!'
 
-[theme."tsuntere".exceptions.IndexError]
+[theme."tsundere".exceptions.IndexError]
 template = '笨蛋! 索引超出范围了啦, 你都不会数数的吗?'
 
-[theme."tsuntere".exceptions.AttributeError]
+[theme."tsundere".exceptions.AttributeError]
 template = '哼, 这个对象才没有 [green]{name}[/green] 这种属性呢, 别乱来!'
 
-[theme."tsuntere".exceptions.FileNotFoundError]
+[theme."tsundere".exceptions.FileNotFoundError]
 template = '文件... 文件 [green]{name}[/green] 不见了啦! 才不是我没找到, 是它自己藏起来了!'
 
-[theme."tsuntere".exceptions.ImportError]
+[theme."tsundere".exceptions.ImportError]
 template = '呜... [green]{name}[/green] 导入失败了, 肯定是这个模块在害羞, 不肯出来!'
 
-[theme."tsuntere".exceptions.ModuleNotFoundError]
+[theme."tsundere".exceptions.ModuleNotFoundError]
 template = '笨蛋! 找不到 [green]{name}[/green] 这个模块啦, 你是不是没安装?'
 
-[theme."tsuntere".exceptions.StopIteration]
+[theme."tsundere".exceptions.StopIteration]
 template = '已经... 没有下一个了啦, 不要再逼人家了!'
 
-[theme."tsuntere".exceptions.AssertionError]
-template = '断言失败了... 人家才没有错, 一定是你的条件有问题!'
+[theme."tsundere".exceptions.AssertionError]
+template = '断言失败了... 人家才没有错, 一定是你的条件有问题! {message}'
 
-[theme."tsuntere".exceptions.IndentationError]
+[theme."tsundere".exceptions.IndentationError]
 template = '缩进都乱掉了啦! 笨蛋, 好好对齐代码不行吗?'
 
-[theme."tsuntere".exceptions.SyntaxError]
-template = '语法错误! 你写的是什么外星代码啊, 人家完全看不懂!'
+[theme."tsundere".exceptions.SyntaxError]
+template = '语法错误! 你写的是什么外星代码啊, 人家完全看不懂! {message}'
 
-[theme."tsuntere".exceptions.OverflowError]
+[theme."tsundere".exceptions.OverflowError]
 template = '数字太大啦, 都溢出来了, 你是在挑战人家的极限吗?'
 
-[theme."tsuntere".exceptions.RecursionError]
+[theme."tsundere".exceptions.RecursionError]
 template = '递归太深了啦, 人家才不要陪你无限循环下去!'
 
-[theme."tsuntere".exceptions.MemoryError]
+[theme."tsundere".exceptions.MemoryError]
 template = '内存不够用了... 都怪你弄出这么多东西, 哼!'
 
-[theme."tsuntere".exceptions.PermissionError]
+[theme."tsundere".exceptions.PermissionError]
 template = '哼, 你没有权限做这个操作啦, 才不是人家不让你做!'
 
-[theme."tsuntere".exceptions.IsADirectoryError]
+[theme."tsundere".exceptions.IsADirectoryError]
 template = '笨蛋! 这是一个目录啦, 难道你把它当文件用嘛?'
 
-[theme."tsuntere".exceptions.NotADirectoryError]
+[theme."tsundere".exceptions.NotADirectoryError]
 template = '这不是目录啦, 你搞错了吧!'
 
-[theme."tsuntere".exceptions.ConnectionError]
+[theme."tsundere".exceptions.ConnectionError]
 template = '连接失败了... 一定是网络在捣乱, 才不是我的问题!'
 
-[theme."tsuntere".exceptions.TimeoutError]
-template = '等了好久都没响应, 人家不干了啦!'
+[theme."tsundere".exceptions.TimeoutError]
+template = '等了好久都没响应, 人家不干了啦! {message}'
 
-[theme."tsuntere".exceptions.RuntimeError]
-template = '运行时出错了... 哼, 反正不是我的错!'
+[theme."tsundere".exceptions.RuntimeError]
+template = '运行时出错了... 哼, 反正不是我的错! {message}'
 
-[theme."tsuntere".exceptions.NotImplementedError]
+[theme."tsundere".exceptions.NotImplementedError]
 template = '这个功能还没实现啦, 你居然想用? 真是的!'
 
-[theme."tsuntere".exceptions.OSError]
-template = '系统出错了... 都是系统的错, 才不是我的问题!'
+[theme."tsundere".exceptions.OSError]
+template = '系统出错了... 都是系统的错, 才不是我的问题! {message}'
 
-[theme."tsuntere".exceptions.EOFError]
+[theme."tsundere".exceptions.EOFError]
 template = '已经读到底了啦, 没有更多内容了, 笨蛋!'
 
-[theme."tsuntere".exceptions.KeyboardInterrupt]
+[theme."tsundere".exceptions.KeyboardInterrupt]
 template = '哼, 你居然打断人家! 不跟你好了!'
 
-[theme."tsuntere".exceptions.SystemExit]
+[theme."tsundere".exceptions.SystemExit]
 template = '程序要退出了啦, 拜拜!'
 
-[theme."tsuntere".exceptions.default]
+[theme."tsundere".exceptions.default]
 template = '呜... 出错了, 是 {message}, 人家才不想告诉你呢!'
 
 [theme."neko".exceptions.NameError]
@@ -204,13 +176,13 @@ template = '主人, [green]{name}[/green] 这个模块没有安装呢, 需要人
 template = '主人, 已经...已经没有下一个了, 人家尽力了, 喵...'
 
 [theme."neko".exceptions.AssertionError]
-template = '主人, 断言失败了, 一定是人家的错, 请责罚...'
+template = '主人, 断言失败了, 一定是人家的错, 请责罚... {message}'
 
 [theme."neko".exceptions.IndentationError]
 template = '主人, 缩进乱了, 人家帮您整理好吗?'
 
 [theme."neko".exceptions.SyntaxError]
-template = '主人, 语法错误, 人家的脑子转不过来了, 呜喵...'
+template = '主人, 语法错误, 人家的脑子转不过来了, 呜喵... {message}'
 
 [theme."neko".exceptions.OverflowError]
 template = '主人, 数字太大了, 人家的猫爪数不过来啦...'
@@ -234,16 +206,16 @@ template = '主人, 这个不是目录呢, 是不是弄错了?'
 template = '主人, 连接失败了, 是网络欺负人家, 喵呜...'
 
 [theme."neko".exceptions.TimeoutError]
-template = '主人, 等太久了, 人家还在这里陪着您呢...'
+template = '主人, 等太久了, 人家还在这里陪着您呢...{message}'
 
 [theme."neko".exceptions.RuntimeError]
-template = '主人, 运行时出错了, 是人家不够细心, 对不起...'
+template = '主人, 运行时出错了, 是人家不够细心, 对不起... {message}'
 
 [theme."neko".exceptions.NotImplementedError]
 template = '主人, 这个功能还没做好, 人家会努力完成的!'
 
 [theme."neko".exceptions.OSError]
-template = '主人, 系统出错了, 都怪系统, 才不是主人的错!'
+template = '主人, 系统出错了, 都怪系统, 才不是主人的错! {message}'
 
 [theme."neko".exceptions.EOFError]
 template = '主人, 已经读到底了, 没有更多内容了喵...'

@@ -1,0 +1,8 @@
+[run]
+parallel = True
+source = tsuntrack 
+
+[paths]
+source =
+    tsuntrack
+    */pytest-of-*/pytest-*/test_*/site-packages/tsuntrack

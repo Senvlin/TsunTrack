@@ -1,0 +1,57 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tsuntrack"
+version = "0.1.0"
+description = "让 Python 的报错变得傲娇起来~ 基于 rich 的全局异常美化器，安装后无需导入即可生效，支持多种主题"
+readme = "README.md"
+requires-python = ">= 3.11"
+license = "MIT"
+authors = [{ name = "Senvlin" }]
+keywords = ["exception", "traceback", "rich", "tsundere", "error", "美化", "傲娇"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Debuggers",
+]
+dependencies = [
+    "rich>=15.0.0",
+    "pygments>=2.13",
+]
+
+[dependency-groups]
+dev = [
+    "coverage>=7.15.4",
+    "pytest>=8.0",
+    "pytest-cov>=7.1.0",
+    "pytest-env>=1.7.0",
+]
+
+[tool.hatch.build]
+include = [
+    "tsuntrack/**",
+    "tsuntrack_auto.pth",
+    "README.md",
+    "LICENSE",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["tsuntrack"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"tsuntrack_auto.pth" = "tsuntrack_auto.pth"
+"tsuntrack/defaults.toml" = "tsuntrack/defaults.toml"
+
+[tool.coverage.run]
+parallel = true
+source = ["tsuntrack"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=tsuntrack --cov-report=term-missing"
