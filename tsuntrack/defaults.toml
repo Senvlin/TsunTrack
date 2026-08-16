@@ -69,6 +69,9 @@ template = '{message}'
 [hints.TypeError]
 template = '{message}'
 
+[hints.ValueError]
+template = '{message}'
+
 [hints.AssertionError]
 template = '{message}'
 
@@ -87,7 +90,7 @@ template = '小笨蛋, 才, 才不会告诉你这个 [green]{name}[/green] 没�
 template = '笨蛋! 类型不对啦!'
 
 [theme."tsuntere".exceptions.ValueError]
-template = '呜... 这个值人家才不会接受呢, {message}'
+template = '呜... 这个值人家才不会接受呢'
 
 [theme."tsuntere".exceptions.ZeroDivisionError]
 template = '哼! 居然想除以零? 人家才不会让你得逞!'
@@ -171,10 +174,10 @@ template = '呜... 出错了, 是 {message}, 人家才不想告诉你呢!'
 template = '主...主人, [green]{name}[/green] 还没有定义呢, 才不是人家故意隐瞒的, 喵呜~'
 
 [theme."neko".exceptions.TypeError]
-template = '主人, 类型不对哦, 是人家没服侍好, 这就给您纠正! {message}'
+template = '主人, 类型不对哦, 是人家没服侍好, 这就给您纠正!'
 
 [theme."neko".exceptions.ValueError]
-template = '主人, 这个值人家真的不擅长呢... {message}'
+template = '主人, 这个值人家真的不擅长呢...'
 
 [theme."neko".exceptions.ZeroDivisionError]
 template = '主人不可以除以零啦, 人家会心疼的, 喵!'
@@ -192,7 +195,7 @@ template = '主人, [green]{name}[/green] 这个属性人家真的没有, 别这
 template = '主人, 文件 [green]{exc_filename}[/green] 不见了, 人家这就去找, 喵!'
 
 [theme."neko".exceptions.ImportError]
-template = '主人, 导入失败了, 是人家侍奉不周, {message}'
+template = '主人, 导入失败了, 是人家侍奉不周...'
 
 [theme."neko".exceptions.ModuleNotFoundError]
 template = '主人, [green]{name}[/green] 这个模块没有安装呢, 需要人家帮您装吗?'
