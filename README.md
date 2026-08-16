@@ -14,7 +14,8 @@
 
 安装并启用后: 
 
-<img width="783" height="271" alt="z'z" src="https://github.com/user-attachments/assets/a7bf6cb8-3fbf-4083-bf17-f781014859fb" />
+<img width="918" height="271" alt="PixPin_2026-08-16_22-33-18" src="https://github.com/user-attachments/assets/ec4e79bb-bcb4-46aa-8b1f-e22fae36c514" />
+
 
 
 ## 特性
