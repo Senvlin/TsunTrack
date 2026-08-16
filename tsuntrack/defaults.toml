@@ -1,6 +1,6 @@
 [general]
 enabled = true
-theme = "tsuntere"
+theme = "neko"
 show_locals = true
 max_frames = 5
 context_lines = 1
@@ -166,3 +166,96 @@ template = '程序要退出了啦, 拜拜!'
 
 [theme."tsuntere".exceptions.default]
 template = '呜... 出错了, 是 {message}, 人家才不想告诉你呢!'
+
+[theme."neko".exceptions.NameError]
+template = '主...主人, [green]{name}[/green] 还没有定义呢, 才不是人家故意隐瞒的, 喵呜~'
+
+[theme."neko".exceptions.TypeError]
+template = '主人, 类型不对哦, 是人家没服侍好, 这就给您纠正! {message}'
+
+[theme."neko".exceptions.ValueError]
+template = '主人, 这个值人家真的不擅长呢... {message}'
+
+[theme."neko".exceptions.ZeroDivisionError]
+template = '主人不可以除以零啦, 人家会心疼的, 喵!'
+
+[theme."neko".exceptions.KeyError]
+template = '主人, 没有 [green]{name}[/green] 这个键呢, 人家找遍了都没有, 呜喵...'
+
+[theme."neko".exceptions.IndexError]
+template = '主人, 越界了啦, 是人家没看好范围, 对不起喵!'
+
+[theme."neko".exceptions.AttributeError]
+template = '主人, [green]{name}[/green] 这个属性人家真的没有, 别这样嘛...'
+
+[theme."neko".exceptions.FileNotFoundError]
+template = '主人, 文件 [green]{exc_filename}[/green] 不见了, 人家这就去找, 喵!'
+
+[theme."neko".exceptions.ImportError]
+template = '主人, 导入失败了, 是人家侍奉不周, {message}'
+
+[theme."neko".exceptions.ModuleNotFoundError]
+template = '主人, [green]{name}[/green] 这个模块没有安装呢, 需要人家帮您装吗?'
+
+[theme."neko".exceptions.StopIteration]
+template = '主人, 已经...已经没有下一个了, 人家尽力了, 喵...'
+
+[theme."neko".exceptions.AssertionError]
+template = '主人, 断言失败了, 一定是人家的错, 请责罚...'
+
+[theme."neko".exceptions.IndentationError]
+template = '主人, 缩进乱了, 人家帮您整理好吗?'
+
+[theme."neko".exceptions.SyntaxError]
+template = '主人, 语法错误, 人家的脑子转不过来了, 呜喵...'
+
+[theme."neko".exceptions.OverflowError]
+template = '主人, 数字太大了, 人家的猫爪数不过来啦...'
+
+[theme."neko".exceptions.RecursionError]
+template = '主人, 递归太深了, 人家头都晕了, 喵呜...'
+
+[theme."neko".exceptions.MemoryError]
+template = '主人, 内存不够了, 是人家没规划好, 对不起...'
+
+[theme."neko".exceptions.PermissionError]
+template = '主人, 您没有权限呢, 不是人家不让您碰, 喵...'
+
+[theme."neko".exceptions.IsADirectoryError]
+template = '主人, 这是个目录哦, 不能当文件用的啦...'
+
+[theme."neko".exceptions.NotADirectoryError]
+template = '主人, 这个不是目录呢, 是不是弄错了?'
+
+[theme."neko".exceptions.ConnectionError]
+template = '主人, 连接失败了, 是网络欺负人家, 喵呜...'
+
+[theme."neko".exceptions.TimeoutError]
+template = '主人, 等太久了, 人家还在这里陪着您呢...'
+
+[theme."neko".exceptions.RuntimeError]
+template = '主人, 运行时出错了, 是人家不够细心, 对不起...'
+
+[theme."neko".exceptions.NotImplementedError]
+template = '主人, 这个功能还没做好, 人家会努力完成的!'
+
+[theme."neko".exceptions.OSError]
+template = '主人, 系统出错了, 都怪系统, 才不是主人的错!'
+
+[theme."neko".exceptions.EOFError]
+template = '主人, 已经读到底了, 没有更多内容了喵...'
+
+[theme."neko".exceptions.KeyboardInterrupt]
+template = '主人!! 您打断人家了... 是人家做错什么了吗?'
+
+[theme."neko".exceptions.SystemExit]
+template = '主人, 程序要退出了, 人家会想您的, 喵...'
+
+[theme."neko".exceptions.default]
+template = '主人, 出错了呢, 是 {message}, 人家会好好处理的喵!'
+
+[theme."neko".hints.ModuleNotFoundError]
+template = '主人, 试试 [green]pip install {pip_name}[/green] 吧, 人家可以帮您哦!'
+
+[theme."neko".hints.NameError]
+template = '主人, 您是不是想写 [green]{did_you_mean}[/green] 呀? 人家猜对了吗?'
