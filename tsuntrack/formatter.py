@@ -122,7 +122,7 @@ def format_message(
     exc_tb,
     cfg: dict[str, Any] | None = None,
     extra: dict[str, Any] | None = None,
-) -> tuple[str, str]:
+) -> str:
     """生成 (消息文本, 样式)
 
     :param cfg: 合并后的配置; 为 None 时内部自动加载
@@ -133,10 +133,9 @@ def format_message(
     exc_name = getattr(exc_type, "__name__", str(exc_type))
     exc_cfg = resolve_exception_config(cfg, exc_name)
     template = exc_cfg.get("template") or DEFAULT_TEMPLATE
-    style = exc_cfg.get("style")
 
     ctx = build_context(exc_type, exc_value, exc_tb)
     if extra:
         ctx.update(extra)
     message = template.format_map(_SafeDict(ctx))
-    return message, style if isinstance(style, str) and style else ""
+    return message

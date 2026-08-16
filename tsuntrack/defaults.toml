@@ -7,8 +7,6 @@ context_lines = 1
 error_line_style = "bold red"
 line_number_style = "dim"
 show_hints = true
-hint_label = "Hint"
-hint_style = "bold orange1"
 
 # 上下文代码高亮:
 # - theme: pygments 内置主题名(如 monokai / default / emacs / friendly / tango),
