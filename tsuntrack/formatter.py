@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from typing import Any, TypedDict, cast
+from typing import Any, NotRequired, TypedDict, cast
 
 from . import config as _config
 
@@ -23,7 +23,6 @@ class _SafeDict(dict[str, Any]):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         # 显式 __init__: 避免类型检查器对"继承 dict.__init__ 重载"的匹配报错
-        # (TypedDict 参数在 pyright 下无法匹配 dict.__init__ 的 mapping 重载)
         super().__init__(*args, **kwargs)
 
     def __missing__(self, key: str) -> str:
@@ -31,14 +30,21 @@ class _SafeDict(dict[str, Any]):
 
 
 class ExceptionContext(TypedDict):
+    """模板占位符上下文
+
+    formatter.build_context 填充基础字段
+    hints 模块填充可选字段 (pip_name / did_you_mean)
+    """
+
     exc_type: str
     message: str
     name: str
-    exc_filename: str
     filename: str
     lineno: int
     func_name: str
     module: str
+    pip_name: NotRequired[str]
+    did_you_mean: NotRequired[str]
 
 
 def _safe_str(exc_value: BaseException | None) -> str:
@@ -93,7 +99,6 @@ def build_context(
         "exc_type": getattr(exc_type, "__name__", str(exc_type)),
         "message": _safe_str(exc_value),
         "name": "",
-        "exc_filename": "",
         "filename": "",
         "lineno": 0,
         "func_name": "",
@@ -101,13 +106,8 @@ def build_context(
     }
 
     ctx["name"] = _extract_name(exc_type, exc_value)
-
-    # OSError 系(FileNotFoundError 等)的文件名, 与栈帧路径 {filename} 区分
-    exc_filename = getattr(exc_value, "filename", None)
-    if exc_filename is None:
-        exc_filename = getattr(exc_value, "filename2", None)
-    if exc_filename is not None:
-        ctx["exc_filename"] = str(exc_filename)
+    # 注意: 缺失文件的文件名统一走 {name}(_extract_name 的 OSError 分支),
+    # 不再提供独立的 exc_filename 占位符, 避免两个占位符含义重叠造成困惑
 
     # 取最内层(离异常最近)的栈帧信息
     frame = exc_tb

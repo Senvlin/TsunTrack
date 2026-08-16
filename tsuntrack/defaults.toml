@@ -15,7 +15,9 @@ show_hints = true
 [general.syntax]
 theme = "monokai"
 
-[general.syntax.styles] # 以One Dark Pro举例, 实际上theme已经内置了（
+[general.syntax.styles] 
+# 以One Dark Pro举例, 实际上theme已经内置了（
+# 以下键值对的键值需要写Pygment自带的Token，自创的会默认不显示，
 "Comment.Special" = "bold #5C6370"
 "Comment" = "#5C6370"
 "String.Doc" = "italic #5C6370"
@@ -103,7 +105,7 @@ template = '笨蛋! 索引超出范围了啦, 你都不会数数的吗?'
 template = '哼, 这个对象才没有 [green]{name}[/green] 这种属性呢, 别乱来!'
 
 [theme."tsuntere".exceptions.FileNotFoundError]
-template = '文件... 文件 [green]{exc_filename}[/green] 不见了啦! 才不是我没找到, 是它自己藏起来了!'
+template = '文件... 文件 [green]{name}[/green] 不见了啦! 才不是我没找到, 是它自己藏起来了!'
 
 [theme."tsuntere".exceptions.ImportError]
 template = '呜... [green]{name}[/green] 导入失败了, 肯定是这个模块在害羞, 不肯出来!'
@@ -190,7 +192,7 @@ template = '主人, 越界了啦, 是人家没看好范围, 对不起喵!'
 template = '主人, [green]{name}[/green] 这个属性人家真的没有, 别这样嘛...'
 
 [theme."neko".exceptions.FileNotFoundError]
-template = '主人, 文件 [green]{exc_filename}[/green] 不见了, 人家这就去找, 喵!'
+template = '主人, 文件 [green]{name}[/green] 不见了, 人家这就去找, 喵!'
 
 [theme."neko".exceptions.ImportError]
 template = '主人, 导入失败了, 是人家侍奉不周...'

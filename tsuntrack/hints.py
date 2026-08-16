@@ -14,14 +14,7 @@ import difflib
 from typing import Any
 
 from . import config as _config
-from . import formatter
-
-
-class _SafeDict(dict[str, Any]):
-    """未知占位符原样保留，不抛 KeyError。"""
-
-    def __missing__(self, key: str) -> str:
-        return "{" + key + "}"
+from .formatter import ExceptionContext, _SafeDict, build_context
 
 
 def _pip_name(name: str, cfg: dict[str, Any]) -> str:
@@ -84,10 +77,10 @@ def build_hint(
         return None
 
     template = hint_cfg["template"]
-    ctx = formatter.build_context(exc_type, exc_value, exc_tb)
+    ctx: ExceptionContext = build_context(exc_type, exc_value, exc_tb)
 
     if "pip_name" in template:
-        ctx["pip_name"] = _pip_name(ctx.get("name") or "", cfg)
+        ctx["pip_name"] = _pip_name(ctx["name"], cfg)
     if "did_you_mean" in template:
         suggestion = _did_you_mean(exc_type, exc_value)
         if not suggestion:
