@@ -25,6 +25,7 @@
 - **手动接口**: 也可以 `import tsuntrack; tsuntrack.install()` 手动启用
 - **智能信息增强**: 保留并美化 Python 原生的 `did-you-mean` 提示
 - **文本丰富化**: 堆栈自带语法高亮, 主题多样. 配置文件支持 `[green]`/`[red]` 等 Rich 标记
+- **协程与线程支持**
 > 只想要报错美化？把theme字段改成空字符串就能体验了
 ## 安装
 
@@ -45,8 +46,8 @@ python -c "print(1/0)"
 ```python
 import tsuntrack
 
-tsuntrack.install()      # 启用
-tsuntrack.uninstall()    # 关闭, 恢复默认行为
+tsuntrack.install()  # 启用
+tsuntrack.uninstall()  # 关闭, 恢复默认行为
 ```
 
 ## 配置
@@ -164,9 +165,8 @@ enabled = false
 
 ## 已知限制
 
-- 只接管主线程的未捕获异常(`sys.excepthook`)
-  - 线程内未捕获异常与 `sys.unraisablehook` 暂未接管
-  - `asyncio` 任务中的异常也不会触发
+- `sys.unraisablehook` 暂未接管
+- `asyncio` 侵入全局 policy, 对于`uvloop`只好先包装
  > 若其他库也替换了 sys.excepthook，可能会静默覆盖
 - `python -S`(不加载 site)等模式下 `.pth` 不会被执行, 需手动 `tsuntrack.install()`
 
