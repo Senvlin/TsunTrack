@@ -36,7 +36,7 @@ class RenderConfig:
     max_frames: int = 5
 
     @classmethod
-    def from_config(cls, cfg: dict[str, Any]) -> "RenderConfig":
+    def from_config(cls, cfg: dict[str, Any]) -> RenderConfig:
         """从合并后的配置(含 defaults + 主题 + 用户)构建渲染参数."""
         general = cfg.get("general") or {}
         syntax = general.get("syntax") or {}
@@ -49,8 +49,10 @@ class RenderConfig:
 
         return cls(
             context_lines=_int("context_lines", cls.context_lines),
-            error_line_style=general.get("error_line_style") or cls.error_line_style,
-            line_number_style=general.get("line_number_style") or cls.line_number_style,
+            error_line_style=general.get("error_line_style")
+            or cls.error_line_style,
+            line_number_style=general.get("line_number_style")
+            or cls.line_number_style,
             syntax_theme=syntax.get("theme", "") or "",
             syntax_styles=syntax.get("styles") or {},
             max_frames=_int("max_frames", cls.max_frames),
@@ -169,19 +171,26 @@ def render(
     message: str,
     config: RenderConfig,
     hint: str | None = None,
+    thread_name: str | None = None,
 ):
     frames = list(traceback.extract_tb(tb))
     if config.max_frames > 0:
-        frames = frames[-config.max_frames:]
+        frames = frames[-config.max_frames :]
     token_style = _build_token_style(config.syntax_theme, config.syntax_styles)
-    for fs in frames:
+    for i, fs in enumerate(frames):
+        # 只在最内层帧(异常抛出点)的帧头后标注线程名, 如: "... in worker[Thread-3]"
+        # 帧头是 rich markup 字符串, 用 \[ 转义字面方括号, 避免被当成样式标签
+        suffix = f"\\[{thread_name}]"
+        frame_tail = f" [dim]{suffix}[/dim]" if thread_name and i == len(frames) - 1 else ""
         console.print(
             f"[dim]{fs.filename}:[/dim][green]{fs.lineno or 0}[/green] in "
-            f"[bold cyan]{fs.name}[/bold cyan]",
+            f"[bold cyan]{fs.name}[/bold cyan]{frame_tail}",
             highlight=False,
         )
         _render_source_block(console, fs, config, token_style)
-    console.print(f"\n[bold red]{exc_type.__name__}[/bold red]: {Text(message)}")
+    console.print(
+        f"\n[bold red]{exc_type.__name__}[/bold red]: {Text(message)}"
+    )
     if hint:
         # 消息行开头已有 \n 做分隔, Hint 紧跟消息下一行, 不再加 \n
         console.print(f"[bold orange1]Hint[/bold orange1]: {Text(hint)}")
