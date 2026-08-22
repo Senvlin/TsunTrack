@@ -27,7 +27,7 @@ _PASSTHROUGH_TYPES: tuple[type[BaseException], ...] = (
 
 _installed = False
 _installed_hooks: list[_hooks.BaseHook] = []
-# 防止多线程/主线程/协程同时报错时输出交错: 一次报错的完整渲染用同一把锁串行化
+# 防止多线程同时报错时输出交错
 _print_lock = threading.RLock()
 
 
@@ -40,7 +40,6 @@ def install() -> bool:
     if not cfg.get("general", {}).get("enabled", True):
         return False
 
-    # 按配置装配钩子集合; 新增出口往列表加一个 Hook 类即可(OCP)
     hook_list: list[_hooks.BaseHook] = [
         _hooks.SysHook(tsuntrack_excepthook),
         _hooks.ThreadingHook(tsuntrack_excepthook),
@@ -70,7 +69,6 @@ def tsuntrack_excepthook(
     exc_tb,
     thread_name: str | None = None,
 ) -> None:
-    """公共渲染编排: 被 sys/threading/asyncio 各出口调用; 内部自带并发输出锁。"""
     with _print_lock:
         if issubclass(exc_type, _PASSTHROUGH_TYPES):
             return sys.__excepthook__(exc_type, exc_value, exc_tb)
