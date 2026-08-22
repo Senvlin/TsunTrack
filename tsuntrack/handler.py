@@ -1,13 +1,4 @@
-"""装配器: 按配置安装/卸载各项异常出口钩子; 提供公共渲染编排 tsuntrack_excepthook。
-
-SOLID 说明:
-- SRP: handler 只做"装配 + 公共渲染编排 + 并发输出锁定"; 每个异常出口的注册/恢复都在
-  hooks.py 各自的 Hook 类里(每个 Hook 一个职责)
-- OCP: 新增异常出口(如 multiprocessing)只需实现一个 BaseHook 子类并加入 install 的装配列表,
-  不改现有逻辑
-- DIP: install/uninstall 依赖抽象接口 BaseHook(而非具体 Sys/Threading/Asyncio 类)
-- ISP: BaseHook 接口最小(install/uninstall + name), 每个 Hook 只依赖自己出口需要的信息
-"""
+"""装配器: 按配置安装/卸载各项异常出口钩子; 提供公共渲染编排 tsuntrack_excepthook"""
 
 from __future__ import annotations
 
