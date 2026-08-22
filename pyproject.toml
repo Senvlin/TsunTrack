@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "tsuntrack"
-version = "0.1.0"
+version = "0.2.0"
 description = "让 Python 的报错变得傲娇起来~ 基于 rich 的全局异常美化器，安装后无需导入即可生效，支持多种主题"
 readme = "README.md"
 requires-python = ">= 3.11"

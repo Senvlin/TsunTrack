@@ -1,11 +1,12 @@
 [general]
 enabled = true
-theme = ""
+theme = "tsundere"
 max_frames = 5
 context_lines = 1
 error_line_style = "bold red"
 line_number_style = "dim"
 show_hints = true
+asyncio_helper = true
 
 [general.syntax]
 theme = "monokai"
@@ -62,7 +63,7 @@ template = '小笨蛋, 才, 才不会告诉你这个 [green]{name}[/green] 没�
 template = '笨蛋! 类型不对啦! {message}'
 
 [theme."tsundere".exceptions.ValueError]
-template = '呜... 这个值人家才不会接受呢 {message}'
+template = '呜... 这个值人家才不会接受呢(p≧w≦q) {message}'
 
 [theme."tsundere".exceptions.ZeroDivisionError]
 template = '哼! 居然想除以零? 人家才不会让你得逞!'

@@ -1,9 +1,5 @@
 """手动体验 TsunTrack 的傲娇报错(显式启用, 无需等待 pip 安装后的自动生效)."""
 
-import tsuntrack
-
-tsuntrack.install()
-
 
 def calculate_discount(price, discount_percent):
     return price * (1 - discount_percent / 100)

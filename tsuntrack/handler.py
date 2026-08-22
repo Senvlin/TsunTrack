@@ -1,12 +1,13 @@
-"""自定义 sys.excepthook: 输出傲娇报错文本 + rich 美化堆栈"""
+"""装配器: 按配置安装/卸载各项异常出口钩子; 提供公共渲染编排 tsuntrack_excepthook"""
 
 from __future__ import annotations
 
 import sys
-from typing import Any
+import threading
 
 from . import config as _config
 from . import formatter, hints
+from . import hooks as _hooks
 
 # 这些异常原样交给原始钩子处理, 不做美化
 _PASSTHROUGH_TYPES: tuple[type[BaseException], ...] = (
@@ -15,76 +16,89 @@ _PASSTHROUGH_TYPES: tuple[type[BaseException], ...] = (
     GeneratorExit,
 )
 
-_original_excepthook: Any = None
 _installed = False
+_installed_hooks: list[_hooks.BaseHook] = []
+# 防止多线程同时报错时输出交错
+_print_lock = threading.RLock()
 
 
 def install() -> bool:
-    """安装全局异常钩子. 返回钩子是否处于启用状态"""
-    global _original_excepthook, _installed
+    """安装全局异常钩子(sys + threading + asyncio). 返回钩子是否处于启用状态"""
+    global _installed, _installed_hooks
     if _installed:
         return True
     cfg = _config.load_config()
     if not cfg.get("general", {}).get("enabled", True):
         return False
-    _original_excepthook = sys.excepthook
-    sys.excepthook = tsuntrack_excepthook
+
+    hook_list: list[_hooks.BaseHook] = [
+        _hooks.SysHook(tsuntrack_excepthook),
+        _hooks.ThreadingHook(tsuntrack_excepthook),
+    ]
+    if cfg.get("general", {}).get("asyncio_helper", True):
+        hook_list.append(_hooks.AsyncioHook(tsuntrack_excepthook))
+
+    for hook in hook_list:
+        hook.install()
+    _installed_hooks = hook_list
     _installed = True
     return True
 
 
 def uninstall() -> None:
-    """卸载钩子, 恢复安装前的 excepthook"""
-    global _original_excepthook, _installed
-    if _installed and _original_excepthook is not None:
-        sys.excepthook = _original_excepthook
+    """卸载钩子, 逆序恢复各出口的原始状态"""
+    global _installed, _installed_hooks
+    for hook in reversed(_installed_hooks):
+        hook.uninstall()
+    _installed_hooks = []
     _installed = False
-    _original_excepthook = None
 
 
 def tsuntrack_excepthook(
     exc_type: type[BaseException],
     exc_value: BaseException,
     exc_tb,
+    thread_name: str | None = None,
 ) -> None:
-    """自定义 excepthook: 打印傲娇消息 + rich 美化堆栈"""
-    original = (
-        _original_excepthook
-        if _original_excepthook is not None
-        else sys.__excepthook__
-    )
-    if issubclass(exc_type, _PASSTHROUGH_TYPES):
-        return original(exc_type, exc_value, exc_tb)
+    with _print_lock:
+        if issubclass(exc_type, _PASSTHROUGH_TYPES):
+            return sys.__excepthook__(exc_type, exc_value, exc_tb)
 
-    try:
-        cfg = _config.load_config()
-        # defaults.toml 不内置extra段, 使用者按需在自己的配置里添加
-        message = formatter.format_message(
-            exc_type,
-            exc_value,
-            exc_tb,
-            cfg,
-            extra=cfg.get("extra") or {},
-        )
-        from .renderer import RenderConfig, render
-
-        config: RenderConfig = RenderConfig.from_config(cfg)
-
-        # rich 延迟导入: 只有真正报错时才付出 import 成本
-        if not sys.stderr.isatty():
-            try:
-                sys.stderr.reconfigure(encoding="utf-8", errors="replace")  # type: ignore
-            except (AttributeError, ValueError, OSError):
-                pass
-        from rich.console import Console
-
-        console = Console(stderr=True)
-
-        # 智能提示, 没有合适提示时为 None
-        hint = hints.build_hint(exc_type, exc_value, exc_tb, cfg)
-        render(console, exc_type, exc_value, exc_tb, message, config, hint)
-    except Exception:
         try:
-            sys.__excepthook__(exc_type, exc_value, exc_tb)
+            cfg = _config.load_config()
+            # defaults.toml 不内置extra段, 使用者按需在自己的配置里添加
+            message = formatter.format_message(
+                exc_type,
+                exc_value,
+                exc_tb,
+                cfg,
+                extra=cfg.get("extra") or {},
+            )
+            from .renderer import RenderConfig, render
+
+            config: RenderConfig = RenderConfig.from_config(cfg)
+
+            # rich 延迟导入
+            if not sys.stderr.isatty():
+                try:
+                    sys.stderr.reconfigure(encoding="utf-8", errors="replace")  # type: ignore
+                except (AttributeError, ValueError, OSError):
+                    pass
+            from rich.console import Console
+
+            console = Console(stderr=True)
+
+            # 智能提示, 没有合适提示时为 None
+            hint = hints.build_hint(exc_type, exc_value, exc_tb, cfg)
+            render(
+                console,
+                exc_type,
+                exc_value,
+                exc_tb,
+                message,
+                config,
+                hint,
+                thread_name=thread_name,
+            )
         except Exception:
-            pass
+            sys.__excepthook__(exc_type, exc_value, exc_tb)
