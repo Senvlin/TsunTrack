@@ -87,7 +87,7 @@ def tsuntrack_excepthook(
 
             config: RenderConfig = RenderConfig.from_config(cfg)
 
-            # rich 延迟导入: 只有真正报错时才付出 import 成本
+            # rich 延迟导入
             if not sys.stderr.isatty():
                 try:
                     sys.stderr.reconfigure(encoding="utf-8", errors="replace")  # type: ignore
