@@ -79,7 +79,7 @@ tsuntrack.uninstall()  # 关闭, 恢复默认行为
 | `yandere` | 病娇 |
 | `chuunibyou` | 中二 |
 
-内置 2 种语言, 通过 `[general] language` 切换(默认 `zh`): `zh`(简体中文) / `en`(English)
+内置 2 种语言, 通过 `[general] language` 切换(默认 `en`): `zh`(简体中文) / `en`(English)
 
 >想贡献新语言新主题?复制 `locales/en.toml` 改一份, 命名为 `locales/xx.toml` 并设置 `language = "xx"` 即可.
 
