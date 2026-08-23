@@ -80,7 +80,7 @@ Five themes are built in; switch with `[general] theme`:
 | `yandere` | Yandere | Sweet on the surface, dangerously possessive |
 | `chuunibyou` | Chuunibyou | Every error comes with an anime trope |
 
-Two languages are built in; switch with `[general] language` (default `zh`): `zh` (Simplified Chinese) / `en` (English)
+Two languages are built in; switch with `[general] language` (default `en`): `zh` (Simplified Chinese) / `en` (English)
 > Want to contribute a new language or a new theme? copy `locales/en.toml`, translate it, save it as `locales/xx.toml`, and set `language = "xx"`.
 
 ### Example
