@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "tsuntrack"
-version = "0.2.0"
+version = "0.2.1"
 description = "让 Python 的报错变得傲娇起来~ 基于 rich 的全局异常美化器，安装后无需导入即可生效，支持多种主题"
 readme = "README.md"
 requires-python = ">= 3.11"
@@ -47,6 +47,8 @@ packages = ["tsuntrack"]
 [tool.hatch.build.targets.wheel.force-include]
 "tsuntrack_auto.pth" = "tsuntrack_auto.pth"
 "tsuntrack/defaults.toml" = "tsuntrack/defaults.toml"
+"tsuntrack/locales/zh.toml" = "tsuntrack/locales/zh.toml"
+"tsuntrack/locales/en.toml" = "tsuntrack/locales/en.toml"
 
 [tool.coverage.run]
 parallel = true
@@ -55,3 +57,6 @@ source = ["tsuntrack"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "--cov=tsuntrack --cov-report=term-missing"
+
+[project.urls]
+"Repository" = "https://github.com/Senvlin/TsunTrack"

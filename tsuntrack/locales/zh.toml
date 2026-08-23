@@ -1,0 +1,458 @@
+# 内置中文语言文件(默认语言)
+# 用户配置始终覆盖本文件中的任何内容.
+
+[hints.ModuleNotFoundError]
+template = '模块 [green]{name}[/green] 未安装, 试试: [green]pip install {pip_name}[/green]'
+
+[hints.ImportError]
+template = '导入失败: 试试 [green]pip install {pip_name}[/green]'
+
+[hints.NameError]
+template = '变量 [green]{name}[/green] 未定义, 你是不是想写 [green]{did_you_mean}[/green]?'
+
+[hints.AttributeError]
+template = '对象没有 [green]{name}[/green] 属性, 你是不是想写 [green]{did_you_mean}[/green]?'
+
+[theme."tsundere".exceptions.NameError]
+template = '小笨蛋, 才, 才不会告诉你这个 [green]{name}[/green] 没定义呢, 哼╯^╰'
+
+[theme."tsundere".exceptions.TypeError]
+template = '笨蛋! 类型不对啦! {message}'
+
+[theme."tsundere".exceptions.ValueError]
+template = '呜... 这个值人家才不会接受呢(p≧w≦q) {message}'
+
+[theme."tsundere".exceptions.ZeroDivisionError]
+template = '哼! 居然想除以零? 人家才不会让你得逞!'
+
+[theme."tsundere".exceptions.KeyError]
+template = '才, 才没有 [green]{name}[/green] 这个键呢! [green]{name}[/green] 什么的, 最讨厌了!'
+
+[theme."tsundere".exceptions.IndexError]
+template = '笨蛋! 索引超出范围了啦, 你都不会数数的吗?'
+
+[theme."tsundere".exceptions.AttributeError]
+template = '哼, 这个对象才没有 [green]{name}[/green] 这种属性呢, 别乱来!'
+
+[theme."tsundere".exceptions.FileNotFoundError]
+template = '文件... 文件 [green]{name}[/green] 不见了啦! 才不是我没找到, 是它自己藏起来了!'
+
+[theme."tsundere".exceptions.ImportError]
+template = '呜... [green]{name}[/green] 导入失败了, 肯定是这个模块在害羞, 不肯出来!'
+
+[theme."tsundere".exceptions.ModuleNotFoundError]
+template = '笨蛋! 找不到 [green]{name}[/green] 这个模块啦, 你是不是没安装?'
+
+[theme."tsundere".exceptions.StopIteration]
+template = '已经... 没有下一个了啦, 不要再逼人家了!'
+
+[theme."tsundere".exceptions.AssertionError]
+template = '断言失败了... 人家才没有错, 一定是你的条件有问题! {message}'
+
+[theme."tsundere".exceptions.IndentationError]
+template = '缩进都乱掉了啦! 笨蛋, 好好对齐代码不行吗?'
+
+[theme."tsundere".exceptions.SyntaxError]
+template = '语法错误! 你写的是什么外星代码啊, 人家完全看不懂! {message}'
+
+[theme."tsundere".exceptions.OverflowError]
+template = '数字太大啦, 都溢出来了, 你是在挑战人家的极限吗?'
+
+[theme."tsundere".exceptions.RecursionError]
+template = '递归太深了啦, 人家才不要陪你无限循环下去!'
+
+[theme."tsundere".exceptions.MemoryError]
+template = '内存不够用了... 都怪你弄出这么多东西, 哼!'
+
+[theme."tsundere".exceptions.PermissionError]
+template = '哼, 你没有权限做这个操作啦, 才不是人家不让你做!'
+
+[theme."tsundere".exceptions.IsADirectoryError]
+template = '笨蛋! 这是一个目录啦, 难道你把它当文件用嘛?'
+
+[theme."tsundere".exceptions.NotADirectoryError]
+template = '这不是目录啦, 你搞错了吧!'
+
+[theme."tsundere".exceptions.ConnectionError]
+template = '连接失败了... 一定是网络在捣乱, 才不是我的问题!'
+
+[theme."tsundere".exceptions.TimeoutError]
+template = '等了好久都没响应, 人家不干了啦! {message}'
+
+[theme."tsundere".exceptions.RuntimeError]
+template = '运行时出错了... 哼, 反正不是我的错! {message}'
+
+[theme."tsundere".exceptions.NotImplementedError]
+template = '这个功能还没实现啦, 你居然想用? 真是的!'
+
+[theme."tsundere".exceptions.OSError]
+template = '系统出错了... 都是系统的错, 才不是我的问题! {message}'
+
+[theme."tsundere".exceptions.EOFError]
+template = '已经读到底了啦, 没有更多内容了, 笨蛋!'
+
+[theme."tsundere".exceptions.KeyboardInterrupt]
+template = '哼, 你居然打断人家! 不跟你好了!'
+
+[theme."tsundere".exceptions.SystemExit]
+template = '程序要退出了啦, 拜拜!'
+
+[theme."tsundere".exceptions.default]
+template = '呜... 出错了, 是 {message}, 人家才不想告诉你呢!'
+
+[theme."neko".exceptions.NameError]
+template = '主...主人, [green]{name}[/green] 还没有定义呢, 才不是人家故意隐瞒的, 喵呜~'
+
+[theme."neko".exceptions.TypeError]
+template = '主人, 类型不对哦, 是人家没服侍好, 这就给您纠正!'
+
+[theme."neko".exceptions.ValueError]
+template = '主人, 这个值人家真的不擅长呢...'
+
+[theme."neko".exceptions.ZeroDivisionError]
+template = '主人不可以除以零啦, 人家会心疼的, 喵!'
+
+[theme."neko".exceptions.KeyError]
+template = '主人, 没有 [green]{name}[/green] 这个键呢, 人家找遍了都没有, 呜喵...'
+
+[theme."neko".exceptions.IndexError]
+template = '主人, 越界了啦, 是人家没看好范围, 对不起喵!'
+
+[theme."neko".exceptions.AttributeError]
+template = '主人, [green]{name}[/green] 这个属性人家真的没有, 别这样嘛...'
+
+[theme."neko".exceptions.FileNotFoundError]
+template = '主人, 文件 [green]{name}[/green] 不见了, 人家这就去找, 喵!'
+
+[theme."neko".exceptions.ImportError]
+template = '主人, 导入失败了, 是人家侍奉不周...'
+
+[theme."neko".exceptions.ModuleNotFoundError]
+template = '主人, [green]{name}[/green] 这个模块没有安装呢, 需要人家帮您装吗?'
+
+[theme."neko".exceptions.StopIteration]
+template = '主人, 已经...已经没有下一个了, 人家尽力了, 喵...'
+
+[theme."neko".exceptions.AssertionError]
+template = '主人, 断言失败了, 一定是人家的错, 请责罚... {message}'
+
+[theme."neko".exceptions.IndentationError]
+template = '主人, 缩进乱了, 人家帮您整理好吗?'
+
+[theme."neko".exceptions.SyntaxError]
+template = '主人, 语法错误, 人家的脑子转不过来了, 呜喵... {message}'
+
+[theme."neko".exceptions.OverflowError]
+template = '主人, 数字太大了, 人家的猫爪数不过来啦...'
+
+[theme."neko".exceptions.RecursionError]
+template = '主人, 递归太深了, 人家头都晕了, 喵呜...'
+
+[theme."neko".exceptions.MemoryError]
+template = '主人, 内存不够了, 是人家没规划好, 对不起...'
+
+[theme."neko".exceptions.PermissionError]
+template = '主人, 您没有权限呢, 不是人家不让您碰, 喵...'
+
+[theme."neko".exceptions.IsADirectoryError]
+template = '主人, 这是个目录哦, 不能当文件用的啦...'
+
+[theme."neko".exceptions.NotADirectoryError]
+template = '主人, 这个不是目录呢, 是不是弄错了?'
+
+[theme."neko".exceptions.ConnectionError]
+template = '主人, 连接失败了, 是网络欺负人家, 喵呜...'
+
+[theme."neko".exceptions.TimeoutError]
+template = '主人, 等太久了, 人家还在这里陪着您呢...{message}'
+
+[theme."neko".exceptions.RuntimeError]
+template = '主人, 运行时出错了, 是人家不够细心, 对不起... {message}'
+
+[theme."neko".exceptions.NotImplementedError]
+template = '主人, 这个功能还没做好, 人家会努力完成的!'
+
+[theme."neko".exceptions.OSError]
+template = '主人, 系统出错了, 都怪系统, 才不是主人的错! {message}'
+
+[theme."neko".exceptions.EOFError]
+template = '主人, 已经读到底了, 没有更多内容了喵...'
+
+[theme."neko".exceptions.KeyboardInterrupt]
+template = '主人!! 您打断人家了... 是人家做错什么了吗?'
+
+[theme."neko".exceptions.SystemExit]
+template = '主人, 程序要退出了, 人家会想您的, 喵...'
+
+[theme."neko".exceptions.default]
+template = '主人, 出错了呢, 是 {message}, 人家会好好处理的喵!'
+
+[theme."neko".hints.ModuleNotFoundError]
+template = '主人, 试试 [green]pip install {pip_name}[/green] 吧, 人家可以帮您哦!'
+
+[theme."neko".hints.NameError]
+template = '主人, 您是不是想写 [green]{did_you_mean}[/green] 呀? 人家猜对了吗?'
+
+# 毒舌主题
+[theme."sarcastic".exceptions.NameError]
+template = '哟, [green]{name}[/green] 都没定义就敢用? 你这代码是闭着眼写的吧?'
+
+[theme."sarcastic".exceptions.TypeError]
+template = '类型不对, 兄弟. 看清楚再传, 好吗? {message}'
+
+[theme."sarcastic".exceptions.ValueError]
+template = '这值你也敢传? 长点心吧. {message}'
+
+[theme."sarcastic".exceptions.ZeroDivisionError]
+template = '除以零? 数学是体育老师教的吧?'
+
+[theme."sarcastic".exceptions.KeyError]
+template = '没有 [green]{name}[/green] 这个键. 字典里没有你还硬要, 真够倔的.'
+
+[theme."sarcastic".exceptions.IndexError]
+template = '越界了. 列表就那么长, 你心里没点数吗?'
+
+[theme."sarcastic".exceptions.AttributeError]
+template = '对象根本没有 [green]{name}[/green] 这个属性. 你是不是拿错对象了?'
+
+[theme."sarcastic".exceptions.FileNotFoundError]
+template = '文件 [green]{name}[/green] 找不到. 你确定它存在过吗?'
+
+[theme."sarcastic".exceptions.ImportError]
+template = '[green]{name}[/green] 导入失败. 装了吗? 装对了吗?'
+
+[theme."sarcastic".exceptions.ModuleNotFoundError]
+template = '模块 [green]{name}[/green] 没装. 先 pip install 再说话.'
+
+[theme."sarcastic".exceptions.StopIteration]
+template = '没下一个了. 迭代器都到头了还硬要, 真有你的.'
+
+[theme."sarcastic".exceptions.AssertionError]
+template = '断言挂了. 你的假设从一开始就是错的. {message}'
+
+[theme."sarcastic".exceptions.IndentationError]
+template = '缩进乱成这样, 你是用记事本写的吧?'
+
+[theme."sarcastic".exceptions.SyntaxError]
+template = '语法错误. 这代码狗看了都摇头. {message}'
+
+[theme."sarcastic".exceptions.OverflowError]
+template = '数字溢出了. 你是想算到宇宙尽头吗?'
+
+[theme."sarcastic".exceptions.RecursionError]
+template = '递归太深. 你是不打算让它停吗? {message}'
+
+[theme."sarcastic".exceptions.MemoryError]
+template = '内存不够了. 你是在把电脑当垃圾场用吗?'
+
+[theme."sarcastic".exceptions.PermissionError]
+template = '没权限. 系统不让你碰, 我也没办法.'
+
+[theme."sarcastic".exceptions.IsADirectoryError]
+template = '这是个目录, 不是文件. 你分得清吗?'
+
+[theme."sarcastic".exceptions.NotADirectoryError]
+template = '这不是目录. 路径都能搞错, 真有你的.'
+
+[theme."sarcastic".exceptions.ConnectionError]
+template = '连接失败. 别急着甩锅给网络, 先想想自己.'
+
+[theme."sarcastic".exceptions.TimeoutError]
+template = '超时了. 等这么久都没回应, 别等了. {message}'
+
+[theme."sarcastic".exceptions.RuntimeError]
+template = '运行时错误. 反正不是我的锅. {message}'
+
+[theme."sarcastic".exceptions.NotImplementedError]
+template = '这功能还没做. 你居然敢调? 胆子不小.'
+
+[theme."sarcastic".exceptions.OSError]
+template = '系统错误. 都是系统的错, 跟你没关系, 满意了吧? {message}'
+
+[theme."sarcastic".exceptions.EOFError]
+template = '读到底了. 没有更多内容, 别贪心.'
+
+[theme."sarcastic".exceptions.KeyboardInterrupt]
+template = '哟, 按 Ctrl+C 跑路? 也行, 反正代码也跑不动.'
+
+[theme."sarcastic".exceptions.SystemExit]
+template = '要退出了. 走好, 不送.'
+
+[theme."sarcastic".exceptions.default]
+template = '出错了: {message}. 具体为啥你自己查, 我可没空哄你.'
+
+# 病娇主题
+[theme."yandere".exceptions.NameError]
+template = '呵呵…[green]{name}[/green] 没有定义呢, 是你忘了写吗? 没关系的, 我会一直看着你的…永远.'
+
+[theme."yandere".exceptions.TypeError]
+template = '类型不对哦…是哪个不长眼的把类型传错了? 要不要我帮你…处理掉它? 呵呵.'
+
+[theme."yandere".exceptions.ValueError]
+template = '这个值…好讨厌呢. 你为什么要传这样的值进来? 是为了让我担心吗? 真是的.'
+
+[theme."yandere".exceptions.ZeroDivisionError]
+template = '除以零? 你想让数字消失吗? 不可以哦…你只能属于我.'
+
+[theme."yandere".exceptions.KeyError]
+template = '这个字典里没有 [green]{name}[/green] 这个键呢…不过没关系, 有我就够了.'
+
+[theme."yandere".exceptions.IndexError]
+template = '越界了哦…你这么着急, 是想逃到哪里去? 我不允许.'
+
+[theme."yandere".exceptions.AttributeError]
+template = '[green]{name}[/green] 这个属性不存在呢…是哪个讨厌鬼骗你的? 告诉我, 我去找它.'
+
+[theme."yandere".exceptions.FileNotFoundError]
+template = '文件 [green]{name}[/green] 不见了…是你把它藏起来了吗? 还是说…它背叛了你? 呵呵, 没关系, 有我在.'
+
+[theme."yandere".exceptions.ImportError]
+template = '[green]{name}[/green] 导入失败了呢…是不是有人从中作梗? 放心, 我会查清楚的.'
+
+[theme."yandere".exceptions.ModuleNotFoundError]
+template = '模块 [green]{name}[/green] 没有安装呢…装不上也没关系, 你只要依赖我就够了.'
+
+[theme."yandere".exceptions.StopIteration]
+template = '没有下一个了哦…到此为止了, 你哪也去不了.'
+
+[theme."yandere".exceptions.AssertionError]
+template = '断言失败了呢…你的条件, 是故意写错的吗? 呵呵, 我当真了哦. {message}'
+
+[theme."yandere".exceptions.IndentationError]
+template = '缩进乱了…是手抖了吗? 要我帮你…把每一行都对齐吗? 永远对齐.'
+
+[theme."yandere".exceptions.SyntaxError]
+template = '语法错误…你写错的样子, 也好可爱呢. 不过, 只能错给我看哦. {message}'
+
+[theme."yandere".exceptions.OverflowError]
+template = '数字溢出了…太大了吗? 就像我对你的喜欢, 已经装不下了呢.'
+
+[theme."yandere".exceptions.RecursionError]
+template = '递归太深…你陷进去了吗? 没关系, 我会把你拉出来的…永远不放手. {message}'
+
+[theme."yandere".exceptions.MemoryError]
+template = '内存不够了…都怪我, 装下了太多关于你的记忆.'
+
+[theme."yandere".exceptions.PermissionError]
+template = '没有权限哦…这个操作, 只有我能碰. 你也是.'
+
+[theme."yandere".exceptions.IsADirectoryError]
+template = '这是个目录呢…你想把它当文件用? 你该不会, 想从我这逃走吧?'
+
+[theme."yandere".exceptions.NotADirectoryError]
+template = '这不是目录哦…你找错地方了. 还是说, 你在找别的出口? 不存在的.'
+
+[theme."yandere".exceptions.ConnectionError]
+template = '连接失败了…是它先放弃你的吗? 呵呵, 真没眼光. 我永远都不会放弃你.'
+
+[theme."yandere".exceptions.TimeoutError]
+template = '超时了呢…等不到回应了吗? 我会一直等你, 多久都可以. {message}'
+
+[theme."yandere".exceptions.RuntimeError]
+template = '运行时错误…不管错多少次, 我都会在这里, 看着你, 陪着你. {message}'
+
+[theme."yandere".exceptions.NotImplementedError]
+template = '这个功能还没实现呢…太好了, 这样你就不会跑去做别的事了.'
+
+[theme."yandere".exceptions.OSError]
+template = '系统错误…是系统欺负你了吗? 告诉我, 我会让它付出代价. {message}'
+
+[theme."yandere".exceptions.EOFError]
+template = '已经读到底了…没有更多了. 这份文件, 只能由我看到最后.'
+
+[theme."yandere".exceptions.KeyboardInterrupt]
+template = '你按下了 Ctrl+C…想中断我? 呵呵, 没用的, 我会一直缠着你.'
+
+[theme."yandere".exceptions.SystemExit]
+template = '要退出程序了吗? 可以哦…反正, 你走到哪里, 我都会跟到哪里.'
+
+[theme."yandere".exceptions.default]
+template = '出错了呢: {message}…没关系的, 错多少次都可以, 我会永远原谅你, 永远陪着你.'
+
+# 中二主题(每个报错都自带一个动漫梗)
+[theme."chuunibyou".exceptions.NameError]
+template = '哼, [green]{name}[/green] 尚未被召唤于此世, 吾之咒语中也未记载其名!'
+
+[theme."chuunibyou".exceptions.TypeError]
+template = '低等存在, 竟敢混淆元素之力(类型)的排列? 此乃对炼金术的亵渎! {message}'
+
+[theme."chuunibyou".exceptions.ValueError]
+template = '此等污秽之物, 也敢献祭给本大爷? 汝的品味还真是次元级的下等. {message}'
+
+[theme."chuunibyou".exceptions.ZeroDivisionError]
+template = '住手! 除以零会撕裂世界线的根基, 汝是想毁灭这个世界吗?!'
+
+[theme."chuunibyou".exceptions.KeyError]
+template = '吾之秘宝库中, 并无名为 [green]{name}[/green] 的封印物! 汝的记忆出了偏差!'
+
+[theme."chuunibyou".exceptions.IndexError]
+template = '越界了! 汝之手指已触及次元壁之外, 凡物不可逾越!'
+
+[theme."chuunibyou".exceptions.AttributeError]
+template = '此物并无名为 [green]{name}[/green] 的秘藏之力, 汝看走眼了, 凡人.'
+
+[theme."chuunibyou".exceptions.FileNotFoundError]
+template = '文件 [green]{name}[/green] 已消失在次元夹缝之中…是被虚空吞噬了吗?'
+
+[theme."chuunibyou".exceptions.ImportError]
+template = '召唤术式 [green]{name}[/green] 发动失败! 此物拒绝响应吾之呼唤!'
+
+[theme."chuunibyou".exceptions.ModuleNotFoundError]
+template = '使魔 [green]{name}[/green] 尚未被召唤到这个世界! 先念 pip install 之咒吧!'
+
+[theme."chuunibyou".exceptions.StopIteration]
+template = '宿命之物已尽…此乃终焉之刻, 吾已无物可予汝.'
+
+[theme."chuunibyou".exceptions.AssertionError]
+template = '命运的契约被撕毁了! 汝之条件与世界的法则相悖! {message}'
+
+[theme."chuunibyou".exceptions.IndentationError]
+template = '结界(缩进)的排列被打乱, 吾之咏唱无法成形! 汝动了手脚?!'
+
+[theme."chuunibyou".exceptions.SyntaxError]
+template = '此咒文不属凡间语言之列…汝究竟从哪个异世界抄来的?! {message}'
+
+[theme."chuunibyou".exceptions.OverflowError]
+template = '数值突破了此世的上限! 吾之魔力也无法承载这禁忌之数!'
+
+[theme."chuunibyou".exceptions.RecursionError]
+template = '无尽循环的魔境…汝深陷其中, 连吾的破界咒都无法解救! {message}'
+
+[theme."chuunibyou".exceptions.MemoryError]
+template = '吾之魔力…枯竭了. 都是因为汝唤出了太多东西!'
+
+[theme."chuunibyou".exceptions.PermissionError]
+template = '此乃禁域! 唯有得到吾之许可者方能踏入, 汝还不够格!'
+
+[theme."chuunibyou".exceptions.IsADirectoryError]
+template = '此物乃连接空间的门扉(目录), 岂能当作凡物(文件)使用! 无知的凡人!'
+
+[theme."chuunibyou".exceptions.NotADirectoryError]
+template = '此处并非空间之门…汝的次元坐标从一开始就是错的!'
+
+[theme."chuunibyou".exceptions.ConnectionError]
+template = '异世界的通道被切断了! 是有人在另一端设下了封印吗?!'
+
+[theme."chuunibyou".exceptions.TimeoutError]
+template = '对方的魔力回路迟迟没有回应…这场对峙, 是吾赢了! {message}'
+
+[theme."chuunibyou".exceptions.RuntimeError]
+template = '世界的法则出现了裂痕…不过, 区区裂痕, 怎奈何得了本大爷! {message}'
+
+[theme."chuunibyou".exceptions.NotImplementedError]
+template = '此禁忌之术仍未解封! 汝竟敢提前召唤, 胆子不小嘛, 凡人.'
+
+[theme."chuunibyou".exceptions.OSError]
+template = '系统的结界崩坏了…此乃世界意志的考验, 与吾无关! {message}'
+
+[theme."chuunibyou".exceptions.EOFError]
+template = '命运的卷轴已读到尽头…余下的篇章, 连吾也无法窥视.'
+
+[theme."chuunibyou".exceptions.KeyboardInterrupt]
+template = '汝竟敢打断吾之咏唱?! 哼, 也罢…此战, 改日再续!'
+
+[theme."chuunibyou".exceptions.SystemExit]
+template = '吾之使命已完成, 此界已无可留恋之物. 再会了, 凡人.'
+
+[theme."chuunibyou".exceptions.default]
+template = '世界又降下了新的试炼: {message}…不过, 这种程度, 本大爷闭着眼都能解决!'

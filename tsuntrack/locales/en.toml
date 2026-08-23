@@ -1,0 +1,459 @@
+# Built-in English locale file
+# Selected by [general] language = "en"; same structure as defaults.toml and
+# deep-merged with it. User config always overrides anything in this file.
+
+[hints.ModuleNotFoundError]
+template = 'Module [green]{name}[/green] is not installed. Try: [green]pip install {pip_name}[/green]'
+
+[hints.ImportError]
+template = 'Import failed: try [green]pip install {pip_name}[/green]'
+
+[hints.NameError]
+template = 'Variable [green]{name}[/green] is not defined. Did you mean [green]{did_you_mean}[/green]?'
+
+[hints.AttributeError]
+template = 'The object has no attribute [green]{name}[/green]. Did you mean [green]{did_you_mean}[/green]?'
+
+[theme."tsundere".exceptions.NameError]
+template = 'Silly! I-I would never tell you that [green]{name}[/green] is not defined. Hmph ╯^╰'
+
+[theme."tsundere".exceptions.TypeError]
+template = 'Idiot! The type is all wrong! {message}'
+
+[theme."tsundere".exceptions.ValueError]
+template = 'Ugh... I would never accept this value (p≧w≦q) {message}'
+
+[theme."tsundere".exceptions.ZeroDivisionError]
+template = 'Hmph! Dividing by zero? I would never let you get away with that!'
+
+[theme."tsundere".exceptions.KeyError]
+template = 'T-there is no key [green]{name}[/green]! I hate [green]{name}[/green] the most!'
+
+[theme."tsundere".exceptions.IndexError]
+template = 'Idiot! The index is out of range! Do you even know how to count?'
+
+[theme."tsundere".exceptions.AttributeError]
+template = 'Hmph, this object has no such attribute [green]{name}[/green]. Do not mess with me!'
+
+[theme."tsundere".exceptions.FileNotFoundError]
+template = 'The file... the file [green]{name}[/green] is gone! It is not that I failed to find it — it hid itself!'
+
+[theme."tsundere".exceptions.ImportError]
+template = 'Ugh... importing [green]{name}[/green] failed. That module must be shy and refusing to come out!'
+
+[theme."tsundere".exceptions.ModuleNotFoundError]
+template = 'Idiot! I cannot find the module [green]{name}[/green]. Did you forget to install it?'
+
+[theme."tsundere".exceptions.StopIteration]
+template = 'There is... there is no next one. Stop pushing me!'
+
+[theme."tsundere".exceptions.AssertionError]
+template = 'Assertion failed... It is not my fault — your condition must be wrong! {message}'
+
+[theme."tsundere".exceptions.IndentationError]
+template = 'The indentation is all messed up! Idiot, why can you not align your code properly?'
+
+[theme."tsundere".exceptions.SyntaxError]
+template = 'Syntax error! What kind of alien code did you write? I cannot understand it at all! {message}'
+
+[theme."tsundere".exceptions.OverflowError]
+template = 'The number is way too big, it overflowed! Are you trying to challenge my limits?'
+
+[theme."tsundere".exceptions.RecursionError]
+template = 'The recursion is too deep! I am not going to loop forever with you!'
+
+[theme."tsundere".exceptions.MemoryError]
+template = 'Out of memory... It is all your fault for creating so many things, hmph!'
+
+[theme."tsundere".exceptions.PermissionError]
+template = 'Hmph, you do not have permission for this. It is not that I am stopping you!'
+
+[theme."tsundere".exceptions.IsADirectoryError]
+template = 'Idiot! This is a directory. Are you using it as a file?'
+
+[theme."tsundere".exceptions.NotADirectoryError]
+template = 'This is not a directory, you got it wrong!'
+
+[theme."tsundere".exceptions.ConnectionError]
+template = 'Connection failed... The network must be messing around. It is not my problem!'
+
+[theme."tsundere".exceptions.TimeoutError]
+template = 'I waited so long with no response. I quit! {message}'
+
+[theme."tsundere".exceptions.RuntimeError]
+template = 'A runtime error occurred... Hmph, it is not my fault anyway! {message}'
+
+[theme."tsundere".exceptions.NotImplementedError]
+template = 'This feature is not implemented yet, and you wanted to use it? Seriously!'
+
+[theme."tsundere".exceptions.OSError]
+template = 'The system errored... It is all the system fault, not mine! {message}'
+
+[theme."tsundere".exceptions.EOFError]
+template = 'We already reached the end. There is no more content, idiot!'
+
+[theme."tsundere".exceptions.KeyboardInterrupt]
+template = 'Hmph, you interrupted me! I am not friends with you anymore!'
+
+[theme."tsundere".exceptions.SystemExit]
+template = 'The program is exiting. Bye bye!'
+
+[theme."tsundere".exceptions.default]
+template = 'Ugh... an error occurred: {message}. I did not even want to tell you!'
+
+[theme."neko".exceptions.NameError]
+template = 'M-master, [green]{name}[/green] is not defined yet. It is not like I hid it on purpose, meow~'
+
+[theme."neko".exceptions.TypeError]
+template = 'Master, the type is wrong. I failed to serve you well — I will correct it right away!'
+
+[theme."neko".exceptions.ValueError]
+template = 'Master, I am really not good with this value...'
+
+[theme."neko".exceptions.ZeroDivisionError]
+template = 'Master cannot divide by zero. It hurts me, meow!'
+
+[theme."neko".exceptions.KeyError]
+template = 'Master, there is no key [green]{name}[/green]. I searched everywhere, meow...'
+
+[theme."neko".exceptions.IndexError]
+template = 'Master, it is out of bounds. I failed to watch the range, sorry meow!'
+
+[theme."neko".exceptions.AttributeError]
+template = 'Master, I really do not have the attribute [green]{name}[/green]. Please do not be like this...'
+
+[theme."neko".exceptions.FileNotFoundError]
+template = 'Master, the file [green]{name}[/green] is missing. I will go find it right away, meow!'
+
+[theme."neko".exceptions.ImportError]
+template = 'Master, the import failed. It is my poor service...'
+
+[theme."neko".exceptions.ModuleNotFoundError]
+template = 'Master, the module [green]{name}[/green] is not installed. Would you like me to install it for you?'
+
+[theme."neko".exceptions.StopIteration]
+template = 'Master, there is... there is no next one anymore. I did my best, meow...'
+
+[theme."neko".exceptions.AssertionError]
+template = 'Master, the assertion failed. It must be my fault. Please punish me... {message}'
+
+[theme."neko".exceptions.IndentationError]
+template = 'Master, the indentation is messy. May I tidy it up for you?'
+
+[theme."neko".exceptions.SyntaxError]
+template = 'Master, a syntax error. My head cannot keep up, meow... {message}'
+
+[theme."neko".exceptions.OverflowError]
+template = 'Master, the number is too big. My cat paws cannot count that high...'
+
+[theme."neko".exceptions.RecursionError]
+template = 'Master, the recursion is too deep. My head is spinning, meow...'
+
+[theme."neko".exceptions.MemoryError]
+template = 'Master, we are out of memory. I did not plan well, sorry...'
+
+[theme."neko".exceptions.PermissionError]
+template = 'Master, you do not have permission. It is not that I do not let you touch it, meow...'
+
+[theme."neko".exceptions.IsADirectoryError]
+template = 'Master, this is a directory. You cannot use it as a file...'
+
+[theme."neko".exceptions.NotADirectoryError]
+template = 'Master, this is not a directory. Did you get it wrong?'
+
+[theme."neko".exceptions.ConnectionError]
+template = 'Master, the connection failed. The network is bullying me, meow...'
+
+[theme."neko".exceptions.TimeoutError]
+template = 'Master, it waited too long. I am still here with you... {message}'
+
+[theme."neko".exceptions.RuntimeError]
+template = 'Master, a runtime error occurred. I was not careful enough, sorry... {message}'
+
+[theme."neko".exceptions.NotImplementedError]
+template = 'Master, this feature is not ready yet. I will work hard to finish it!'
+
+[theme."neko".exceptions.OSError]
+template = 'Master, the system errored. It is all the system fault, not yours! {message}'
+
+[theme."neko".exceptions.EOFError]
+template = 'Master, we reached the end. There is no more content, meow...'
+
+[theme."neko".exceptions.KeyboardInterrupt]
+template = 'Master!! You interrupted me... Did I do something wrong?'
+
+[theme."neko".exceptions.SystemExit]
+template = 'Master, the program is exiting. I will miss you, meow...'
+
+[theme."neko".exceptions.default]
+template = 'Master, an error occurred: {message}. I will take good care of it, meow!'
+
+[theme."neko".hints.ModuleNotFoundError]
+template = 'Master, try [green]pip install {pip_name}[/green]. I can help you!'
+
+[theme."neko".hints.NameError]
+template = 'Master, did you mean [green]{did_you_mean}[/green]? Did I guess right?'
+
+# Sarcastic ("poison-tongued") theme
+[theme."sarcastic".exceptions.NameError]
+template = 'Oh look, [green]{name}[/green] is not defined. Did you even look at your code before running it?'
+
+[theme."sarcastic".exceptions.TypeError]
+template = 'Wrong type, genius. Read the docs once in a while. {message}'
+
+[theme."sarcastic".exceptions.ValueError]
+template = 'You really passed that value? Bold move. {message}'
+
+[theme."sarcastic".exceptions.ZeroDivisionError]
+template = 'Dividing by zero? Did you fail math too?'
+
+[theme."sarcastic".exceptions.KeyError]
+template = 'No key [green]{name}[/green]. The dict does not have it — stop demanding things.'
+
+[theme."sarcastic".exceptions.IndexError]
+template = 'Out of range. The list is not that long; count again.'
+
+[theme."sarcastic".exceptions.AttributeError]
+template = 'No attribute [green]{name}[/green] on this object. Wrong object, maybe?'
+
+[theme."sarcastic".exceptions.FileNotFoundError]
+template = 'File [green]{name}[/green] not found. Are you sure it ever existed?'
+
+[theme."sarcastic".exceptions.ImportError]
+template = 'Import of [green]{name}[/green] failed. Did you install it? Correctly?'
+
+[theme."sarcastic".exceptions.ModuleNotFoundError]
+template = 'Module [green]{name}[/green] is not installed. Run pip install first, then talk.'
+
+[theme."sarcastic".exceptions.StopIteration]
+template = 'No more items. The iterator is done — stop pushing it.'
+
+[theme."sarcastic".exceptions.AssertionError]
+template = 'Assertion failed. Your assumptions were wrong from the start. {message}'
+
+[theme."sarcastic".exceptions.IndentationError]
+template = 'Indentation is a mess. Did you write this in Notepad?'
+
+[theme."sarcastic".exceptions.SyntaxError]
+template = 'Syntax error. Even the linter is facepalming. {message}'
+
+[theme."sarcastic".exceptions.OverflowError]
+template = 'Number overflowed. Were you trying to count to infinity?'
+
+[theme."sarcastic".exceptions.RecursionError]
+template = 'Recursion too deep. Did you forget to stop it? {message}'
+
+[theme."sarcastic".exceptions.MemoryError]
+template = 'Out of memory. Are you using your computer as a dumpster?'
+
+[theme."sarcastic".exceptions.PermissionError]
+template = 'No permission. The system said no — nothing I can do.'
+
+[theme."sarcastic".exceptions.IsADirectoryError]
+template = 'That is a directory, not a file. Do you know the difference?'
+
+[theme."sarcastic".exceptions.NotADirectoryError]
+template = 'Not a directory. You got the path wrong again.'
+
+[theme."sarcastic".exceptions.ConnectionError]
+template = 'Connection failed. Blame the network all you want, but check yourself first.'
+
+[theme."sarcastic".exceptions.TimeoutError]
+template = 'Timed out. Nothing responded for ages — give up. {message}'
+
+[theme."sarcastic".exceptions.RuntimeError]
+template = 'Runtime error. Not my fault, obviously. {message}'
+
+[theme."sarcastic".exceptions.NotImplementedError]
+template = 'Not implemented yet, and you called it? Bold. Very bold.'
+
+[theme."sarcastic".exceptions.OSError]
+template = 'System error. It is all the system fault, not yours — happy now? {message}'
+
+[theme."sarcastic".exceptions.EOFError]
+template = 'Reached the end. No more content — stop being greedy.'
+
+[theme."sarcastic".exceptions.KeyboardInterrupt]
+template = 'Oh, running away with Ctrl+C? Fine, it was not working anyway.'
+
+[theme."sarcastic".exceptions.SystemExit]
+template = 'Exiting. Do not let the door hit you on the way out.'
+
+[theme."sarcastic".exceptions.default]
+template = 'An error: {message}. Figure out why yourself — I am not here to babysit you.'
+
+# Yandere theme
+[theme."yandere".exceptions.NameError]
+template = 'Hehe... [green]{name}[/green] is not defined. Did you forget to write it? It is fine — I will always watch over you... forever.'
+
+[theme."yandere".exceptions.TypeError]
+template = 'The type is wrong... who dared to pass the wrong type? Want me to... take care of them? Hehe.'
+
+[theme."yandere".exceptions.ValueError]
+template = 'This value... I hate it. Why did you pass it in? To make me worry? How mean.'
+
+[theme."yandere".exceptions.ZeroDivisionError]
+template = 'Dividing by zero? Do you want the number to disappear? No, you cannot... you belong to me only.'
+
+[theme."yandere".exceptions.KeyError]
+template = 'There is no key [green]{name}[/green] in this dict... but it is fine, you only need me.'
+
+[theme."yandere".exceptions.IndexError]
+template = 'Out of bounds... are you in such a hurry to run somewhere? I will not allow it.'
+
+[theme."yandere".exceptions.AttributeError]
+template = 'The attribute [green]{name}[/green] does not exist... who lied to you? Tell me, I will find them.'
+
+[theme."yandere".exceptions.FileNotFoundError]
+template = 'The file [green]{name}[/green] is gone... did you hide it? Or did it betray you? Hehe, it is fine, I am here.'
+
+[theme."yandere".exceptions.ImportError]
+template = 'Importing [green]{name}[/green] failed... is someone meddling? Do not worry, I will get to the bottom of it.'
+
+[theme."yandere".exceptions.ModuleNotFoundError]
+template = 'Module [green]{name}[/green] is not installed... even if you cannot install it, you only need to depend on me.'
+
+[theme."yandere".exceptions.StopIteration]
+template = 'No more items... this is the end. There is nowhere else you can go.'
+
+[theme."yandere".exceptions.AssertionError]
+template = 'Assertion failed... did you write your condition wrong on purpose? Hehe, I am taking it seriously. {message}'
+
+[theme."yandere".exceptions.IndentationError]
+template = 'The indentation is messy... did your hand slip? Want me to... align every line for you? Aligned forever.'
+
+[theme."yandere".exceptions.SyntaxError]
+template = 'Syntax error... the way you make mistakes is so cute. But you may only make them for me. {message}'
+
+[theme."yandere".exceptions.OverflowError]
+template = 'Number overflowed... too big? Just like my love for you — it no longer fits.'
+
+[theme."yandere".exceptions.RecursionError]
+template = 'Recursion too deep... did you get trapped? It is fine, I will pull you out... and never let go. {message}'
+
+[theme."yandere".exceptions.MemoryError]
+template = 'Out of memory... it is my fault, I stored too many memories of you.'
+
+[theme."yandere".exceptions.PermissionError]
+template = 'No permission... only I may touch this. You too.'
+
+[theme."yandere".exceptions.IsADirectoryError]
+template = 'That is a directory... you tried to use it as a file? You are not trying to run away from me, are you?'
+
+[theme."yandere".exceptions.NotADirectoryError]
+template = 'That is not a directory... you are looking in the wrong place. Or are you looking for another exit? There is none.'
+
+[theme."yandere".exceptions.ConnectionError]
+template = 'Connection failed... did it give up on you first? Hehe, what bad taste. I will never give up on you.'
+
+[theme."yandere".exceptions.TimeoutError]
+template = 'Timed out... no response? I will wait for you, as long as it takes. {message}'
+
+[theme."yandere".exceptions.RuntimeError]
+template = 'Runtime error... no matter how many times you fail, I will be here, watching you, with you. {message}'
+
+[theme."yandere".exceptions.NotImplementedError]
+template = 'Not implemented yet... how nice, now you will not go off doing other things.'
+
+[theme."yandere".exceptions.OSError]
+template = 'System error... did the system bully you? Tell me, I will make it pay. {message}'
+
+[theme."yandere".exceptions.EOFError]
+template = 'Reached the end... nothing more. This file may only be read to the end by me.'
+
+[theme."yandere".exceptions.KeyboardInterrupt]
+template = 'You pressed Ctrl+C... trying to interrupt me? Hehe, useless. I will always cling to you.'
+
+[theme."yandere".exceptions.SystemExit]
+template = 'Exiting the program? Fine... because wherever you go, I will follow.'
+
+[theme."yandere".exceptions.default]
+template = 'An error: {message}... it is fine, make as many mistakes as you want. I will always forgive you, always be with you.'
+
+# Chuunibyou theme (every error carries an anime trope)
+[theme."chuunibyou".exceptions.NameError]
+template = 'Hmph, [green]{name}[/green] has not been summoned into this world yet, and my incantations record no such name!'
+
+[theme."chuunibyou".exceptions.TypeError]
+template = 'Lowly being, you dare to confuse the arrangement of the elements (types)? This is blasphemy against alchemy! {message}'
+
+[theme."chuunibyou".exceptions.ValueError]
+template = 'You offer such foul offerings to me? Your taste is a dimensional level of trash. {message}'
+
+[theme."chuunibyou".exceptions.ZeroDivisionError]
+template = 'Stop! Dividing by zero will tear the very foundation of the world line! Do you wish to destroy this world?!'
+
+[theme."chuunibyou".exceptions.KeyError]
+template = 'My vault of relics holds no seal named [green]{name}[/green]! Your memory has deviated!'
+
+[theme."chuunibyou".exceptions.IndexError]
+template = 'Out of bounds! Your finger has touched the void beyond the dimensional wall — mere mortals may not pass!'
+
+[theme."chuunibyou".exceptions.AttributeError]
+template = 'This object holds no hidden power named [green]{name}[/green]. You misjudged it, mortal.'
+
+[theme."chuunibyou".exceptions.FileNotFoundError]
+template = 'The file [green]{name}[/green] has vanished into the gap between dimensions... devoured by the void?'
+
+[theme."chuunibyou".exceptions.ImportError]
+template = 'The summoning rite [green]{name}[/green] failed! That thing refuses to answer my call!'
+
+[theme."chuunibyou".exceptions.ModuleNotFoundError]
+template = 'The familiar [green]{name}[/green] has not been summoned to this world! Chant the spell of pip install first!'
+
+[theme."chuunibyou".exceptions.StopIteration]
+template = 'Fate has nothing left to offer... this is the hour of the end, and I have nothing more to give you.'
+
+[theme."chuunibyou".exceptions.AssertionError]
+template = 'The pact of fate has been torn apart! Your conditions defy the laws of this world! {message}'
+
+[theme."chuunibyou".exceptions.IndentationError]
+template = 'The alignment of the barrier (indentation) is shattered, and my chant cannot take form! You tampered with it?!'
+
+[theme."chuunibyou".exceptions.SyntaxError]
+template = 'This incantation is beyond mortal language... which other world did you copy it from?! {message}'
+
+[theme."chuunibyou".exceptions.OverflowError]
+template = 'The value has broken past the cap of this world! Even my mana cannot bear this forbidden number!'
+
+[theme."chuunibyou".exceptions.RecursionError]
+template = 'The maze of infinite loops... you are trapped in it, and even my world-breaking spell cannot save you! {message}'
+
+[theme."chuunibyou".exceptions.MemoryError]
+template = 'My mana... is depleted. All because you summoned too many things!'
+
+[theme."chuunibyou".exceptions.PermissionError]
+template = 'This is a forbidden zone! Only those I permit may enter — and you are not worthy!'
+
+[theme."chuunibyou".exceptions.IsADirectoryError]
+template = 'This is a gate between spaces (a directory), not a common item (a file)! Ignorant mortal!'
+
+[theme."chuunibyou".exceptions.NotADirectoryError]
+template = 'This is no gate between spaces... your dimensional coordinates were wrong from the start!'
+
+[theme."chuunibyou".exceptions.ConnectionError]
+template = 'The channel to another world has been severed! Did someone lay a seal on the other side?!'
+
+[theme."chuunibyou".exceptions.TimeoutError]
+template = 'The enemy magic circuit gives no response... in this standoff, I am the victor! {message}'
+
+[theme."chuunibyou".exceptions.RuntimeError]
+template = 'A crack has appeared in the laws of this world... but a mere crack cannot stop me! {message}'
+
+[theme."chuunibyou".exceptions.NotImplementedError]
+template = 'This forbidden art is still sealed! You dared to summon it early? Bold of you, mortal.'
+
+[theme."chuunibyou".exceptions.OSError]
+template = 'The barrier of the system has crumbled... this is a trial from the world will, and has nothing to do with me! {message}'
+
+[theme."chuunibyou".exceptions.EOFError]
+template = 'The scroll of fate has been read to its end... the remaining chapters are hidden even from me.'
+
+[theme."chuunibyou".exceptions.KeyboardInterrupt]
+template = 'You dare interrupt my chant?! Hmph, very well... this battle shall continue another day!'
+
+[theme."chuunibyou".exceptions.SystemExit]
+template = 'My mission is complete, and nothing in this world holds me here. Farewell, mortal.'
+
+[theme."chuunibyou".exceptions.default]
+template = 'The world has cast a new trial upon us: {message}... but a trial like this, I can overcome with my eyes closed!'

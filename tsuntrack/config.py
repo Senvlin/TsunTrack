@@ -6,21 +6,13 @@
 2. 当前工作目录下的 ``tsuntrack.toml``
 3. 用户主目录 ``~/.config/tsuntrack/config.toml``
 4. 包内置 ``defaults.toml``
-
-合并规则(三层, 从低到高):
-
-- 基础配置: defaults.toml 中除 ``[theme.*]`` 之外的内容(所有主题共用)
-- 主题覆盖: 按 ``[general] theme`` 选中的 ``[theme."主题名".*]`` 覆盖基础配置
-- 用户配置: 用户文件最后合并, 可以覆盖上面的任何内容
-
-结果会被缓存, 修改配置文件后调用 :func:`reload_config` 重新读取
 """
 
 from __future__ import annotations
 
 import os
-import sys
 import tomllib
+import warnings
 from pathlib import Path
 from typing import Any
 
@@ -28,6 +20,8 @@ ENV_VAR = "TSUNTRACK_CONFIG"
 CWD_FILE = "tsuntrack.toml"
 USER_CONFIG_REL = Path(".config") / "tsuntrack" / "config.toml"
 DEFAULTS_FILE = "defaults.toml"
+LOCALES_DIR = Path(__file__).with_name("locales")
+DEFAULT_LANGUAGE = "zh"
 
 _cache: dict[str, Any] | None = None
 
@@ -39,6 +33,34 @@ def _defaults() -> dict[str, Any]:
         return tomllib.load(f)
 
 
+def _load_locale(language: str) -> dict[str, Any]:
+    """读取内置语言文件 ``locales/{language}.toml``; 找不到时回退默认语言, 仍失败返回 {}
+
+    :param language: ``[general] language`` 的值, 如 ``zh`` / ``en``
+    """
+    path = LOCALES_DIR / f"{language}.toml"
+    if not path.is_file():
+        if language != DEFAULT_LANGUAGE:
+            warnings.warn(
+                f"TsunTrack: locale '{language}' not found, "
+                f"falling back to '{DEFAULT_LANGUAGE}'.",
+            )
+        path = LOCALES_DIR / f"{DEFAULT_LANGUAGE}.toml"
+    if not path.is_file():
+        warnings.warn(
+            f"TsunTrack: default locale '{DEFAULT_LANGUAGE}' not found, language support disabled."
+        )
+        return {}
+    try:
+        with path.open("rb") as f:
+            return tomllib.load(f)
+    except (OSError, tomllib.TOMLDecodeError) as exc:
+        warnings.warn(
+            f"TsunTrack: locale file {path} failed to load ({exc}), skipped.",
+        )
+        return {}
+
+
 def _candidates() -> list[Path]:
     """按优先级返回候选配置文件路径(不保证都存在)"""
     paths: list[Path] = []
@@ -48,23 +70,29 @@ def _candidates() -> list[Path]:
         if env_path.is_file():
             paths.append(env_path)
         else:
-            print(
-                f"TsunTrack: 环境变量 {ENV_VAR} 指向的文件不存在：{env_path}，已忽略",
-                file=sys.stderr,
+            warnings.warn(
+                f"TsunTrack: env var {ENV_VAR} points to a missing file: "
+                f"{env_path}, ignored.",
             )
     paths.append(Path.cwd() / CWD_FILE)
     paths.append(Path.home() / USER_CONFIG_REL)
     return paths
 
 
-def _deep_merge(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
-    """递归合并两个字典: override 覆盖 base, 子字典逐层合并(支持部分覆盖)"""
+def _deep_merge(
+    base: dict[str, Any], override: dict[str, Any]
+) -> dict[str, Any]:
     merged = dict(base)
+
     for key, value in override.items():
-        if isinstance(value, dict) and isinstance(merged.get(key), dict):
-            merged[key] = _deep_merge(merged[key], value)
-        else:
-            merged[key] = value
+        # 只有当 value 本身是字典时，才需要考虑递归合并
+        if isinstance(value, dict):
+            existing = merged.get(key)
+            if isinstance(existing, dict):
+                merged[key] = _deep_merge(existing, value)
+                continue
+        merged[key] = value
+
     return merged
 
 
@@ -74,45 +102,50 @@ def _without_theme(cfg: dict[str, Any]) -> dict[str, Any]:
 
 
 def load_config(use_cache: bool = True) -> dict[str, Any]:
-    """加载配置: 基础层 + 主题覆盖层 + 用户配置层, 返回合并结果
-
-    :param use_cache: 是否使用模块级缓存(默认使用)
-    """
+    """加载配置: 基础层 + 主题覆盖层 + 用户配置层, 返回合并结果"""
     global _cache
     if use_cache and _cache is not None:
         return _cache
 
     defaults = _defaults()
 
-    # 1) 用户配置逐层合并(拿到用户改过的 theme / 自定义主题 / 覆盖项)
-    user: dict[str, Any] = {}
-    for path in _candidates():
+    user = {}
+    for path in reversed(_candidates()):
         if not path.is_file():
-            continue  # 该优先级下没有配置文件, 继续往下找
+            continue
         try:
             with path.open("rb") as f:
                 user_cfg = tomllib.load(f)
         except (OSError, tomllib.TOMLDecodeError) as exc:
-            print(
-                f"TsunTrack: 配置文件 {path} 读取失败（{exc}），已跳过。",
-                file=sys.stderr,
+            warnings.warn(
+                f"TsunTrack: failed to read config file {path} ({exc}), skipped."
             )
             continue
         user = _deep_merge(user, user_cfg)
 
-    # 2) 确定当前主题名: 用户配置优先, 否则内置默认
+    language = (user.get("general") or {}).get("language") or (
+        defaults.get("general") or {}
+    ).get("language", DEFAULT_LANGUAGE)
+    locale = _load_locale(language)
+
     theme_name = (user.get("general") or {}).get("theme") or (
         defaults.get("general") or {}
     ).get("theme", "")
 
-    # 3) 主题覆盖层: 内置主题 + 用户自定义主题, 按主题名选择
-    themes = _deep_merge(defaults.get("theme") or {}, user.get("theme") or {})
-    theme_cfg = themes.get(theme_name) if theme_name else None
-    base = _without_theme(defaults)
-    if isinstance(theme_cfg, dict):
-        base = _deep_merge(base, theme_cfg)
+    base = _deep_merge(_without_theme(defaults), _without_theme(locale))
 
-    # 4) 用户配置最后合并: 用户 > 主题 > 基础
+    if theme_name:
+        theme_overrides = {}
+        locale_theme = locale.get("theme", {}).get(theme_name)
+        if locale_theme:
+            theme_overrides = _deep_merge(theme_overrides, locale_theme)
+        user_theme = user.get("theme", {}).get(theme_name)
+        if user_theme:
+            theme_overrides = _deep_merge(theme_overrides, user_theme)
+        if theme_overrides:
+            base = _deep_merge(base, theme_overrides)
+
+    # 用户配置（非主题部分）最后覆盖
     merged = _deep_merge(base, _without_theme(user))
 
     _cache = merged

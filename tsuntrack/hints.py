@@ -25,7 +25,9 @@ def _pip_name(name: str, cfg: dict[str, Any]) -> str:
     return aliases.get(name, name)
 
 
-def _did_you_mean(exc_type: type[BaseException], exc_value: BaseException) -> str:
+def _did_you_mean(
+    exc_type: type[BaseException], exc_value: BaseException
+) -> str:
     """找最接近的已定义名称：NameError 查变量/内建，AttributeError 查对象属性。"""
     name = getattr(exc_value, "name", None)
     if not name:
@@ -83,8 +85,6 @@ def build_hint(
         ctx["pip_name"] = _pip_name(ctx["name"], cfg)
     if "did_you_mean" in template:
         suggestion = _did_you_mean(exc_type, exc_value)
-        if not suggestion:
-            return None
-        ctx["did_you_mean"] = suggestion
+        ctx["did_you_mean"] = suggestion or ""
 
     return template.format_map(_SafeDict(ctx))
