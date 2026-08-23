@@ -16,7 +16,9 @@ def _auto_install() -> None:
         install()
     except Exception as exc:
         print(
-            f"TsunTrack: 自动安装失败（{exc!r}），请检查安装是否完整。", file=sys.stderr
+            f"TsunTrack: auto-install failed ({exc!r}), "
+            "please check the installation.",
+            file=sys.stderr,
         )
 
 
