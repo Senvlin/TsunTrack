@@ -1,142 +1,164 @@
 # TsunTrack
 
-> 让 Python 的报错变得**傲娇**起来～
+<div align="center">
 
+🌏 Language: [简体中文](README.zh.md) | **English**
+
+</div>
+
+> Make Python errors **tsundere**～
 
 ---
-基于 [rich](https://github.com/Textualize/rich) 的全局异常美化器, 零侵入、纯配置驱动的全局异常美化器, 安装即用, 自带傲娇人格. 
 
-## 效果
+A global exception beautifier built on [rich](https://github.com/Textualize/rich) — zero-intrusion, purely configuration-driven, install-and-go, and shipped with a built-in tsundere personality.
 
-未安装 / 关闭时: 
+## Screenshots
+
+Without installation / when disabled:
 
 <img width="907" height="211" alt="zzz" src="https://github.com/user-attachments/assets/7307dcf1-858f-4541-b502-b852a5badb9d" />
 
-安装并启用后: 
+After installation and enabling:
 
-<img width="783" height="271" alt="z'z" src="https://github.com/user-attachments/assets/a7bf6cb8-3fbf-4083-bf17-f781014859fb" />
+<img width="909" height="271" alt="image" src="https://github.com/user-attachments/assets/4acd8f2b-bb24-4956-8b19-a83dca7c8acd" />
 
+## Features
 
-## 特性
+- **Theme switching**: errors are no longer cold, bare stack traces. Change one line — `[general] theme = "..."` — and freely switch to any style: sarcastic, healing, chuunibyou… whatever you like
+- **Install & go**: hooks are installed automatically at interpreter startup via `tsuntrack_auto.pth`; zero changes to your business code
+- **Configuration-driven**: all error messages and styles come from a TOML config; colors are customizable, with support for partial overrides and extended placeholders
+- **Manual API**: you can also enable it manually with `import tsuntrack; tsuntrack.install()`
+- **Smart hint enhancement**: keeps and beautifies Python's native `did-you-mean` suggestions
+- **Rich text**: stack traces come with syntax highlighting and multiple themes; the config supports Rich markup such as `[green]` / `[red]`
+- **Coroutine & thread support**
 
-- **风格切换**: 报错不再是冷冰冰的堆栈, 改一句 `[general] theme = "..."`, 你可以自由改成毒舌、治愈、中二……任何风格
-- **装完即用**: 通过 `tsuntrack_auto.pth` 在解释器启动时自动安装钩子, 业务代码零改动
-- **配置文件驱动**: 报错文案、样式全部来自 TOML 配置, 可自定义颜色, 支持部分覆盖与扩展占位符
-- **手动接口**: 也可以 `import tsuntrack; tsuntrack.install()` 手动启用
-- **智能信息增强**: 保留并美化 Python 原生的 `did-you-mean` 提示
-- **文本丰富化**: 堆栈自带语法高亮, 主题多样. 配置文件支持 `[green]`/`[red]` 等 Rich 标记
-- **协程与线程支持**
-> 只想要报错美化？把theme字段改成空字符串就能体验了
-## 安装
+> Just want the error beautification? Set the `theme` field to an empty string and give it a try.
 
-要求 Python 3.11+. 使用 pip: 
+## Installation
+
+Requires Python 3.11+. Install with pip:
 
 ```powershell
 pip install tsuntrack
 ```
 
-安装后无需任何 import——随便跑一个会报错的脚本, 看看效果吧: 
+No import needed after installation — just run any script that raises an error and see the result:
 
 ```powershell
 python -c "print(1/0)"
 ```
 
-## 手动启用 / 关闭
+## Manual Enable / Disable
 
 ```python
 import tsuntrack
 
-tsuntrack.install()  # 启用
-tsuntrack.uninstall()  # 关闭, 恢复默认行为
+tsuntrack.install()  # Enable
+tsuntrack.uninstall()  # Disable, restoring default behavior
 ```
 
-## 配置
+## Configuration
 
-### 查找顺序(优先级从高到低)
+### Lookup order (highest priority first)
 
-1. 环境变量 `TSUNTRACK_CONFIG` 指定的路径
-2. 当前工作目录下的 `tsuntrack.toml`
-3. 用户主目录 `~/.config/tsuntrack/config.toml`
-4. 包内置 `defaults.toml`
+1. The path specified by the `TSUNTRACK_CONFIG` environment variable
+2. `tsuntrack.toml` in the current working directory
+3. `~/.config/tsuntrack/config.toml` in the user's home directory
+4. The bundled `defaults.toml` inside the package
 
-用户配置与默认配置**深合并**:, 只需写你想改的字段
+User configuration and defaults are **deep-merged** — just write the fields you want to change.
 
-### 示例
+### Built-in Themes & Languages
+
+Five themes are built in; switch with `[general] theme`:
+
+| Theme | Style | Description |
+| --- | --- | --- |
+| `tsundere` | Tsundere | Default theme; tough on the outside, soft inside |
+| `neko` | Catgirl | Calls you master and serves you dutifully |
+| `sarcastic` | Sharp-tongued | Biting sarcasm, but always tells the truth |
+| `yandere` | Yandere | Sweet on the surface, dangerously possessive |
+| `chuunibyou` | Chuunibyou | Every error comes with an anime trope |
+
+Two languages are built in; switch with `[general] language` (default `zh`): `zh` (Simplified Chinese) / `en` (English)
+> Want to contribute a new language or a new theme? copy `locales/en.toml`, translate it, save it as `locales/xx.toml`, and set `language = "xx"`.
+
+### Example
 
 ```toml
 [general]
-enabled = true # 总开关
-theme = "tsuntere" # 当前主题
-max_frames = 5 # 最多显示的堆栈层数(保留最内层)
-context_lines = 1 # 上下文代码显示行数
-error_line_style = "bold red" # 报错代码高亮颜色
-line_number_style = "dim" # 行数颜色
-show_hints = true # 是否显示提示
-            
-# 上下文代码高亮:
+enabled = true # Master switch
+theme = "tsundere" # Current theme
+language = "zh" # Language: zh / en
+max_frames = 5 # Max stack frames shown (keeps the innermost ones)
+context_lines = 1 # Lines of context code to show
+error_line_style = "bold red" # Highlight color for the error line
+line_number_style = "dim" # Line-number color
+show_hints = true # Whether to show hints
+
+# Context code highlighting:
 
 [general.syntax]
-# - theme: pygments 内置主题名(如 monokai / default / emacs / friendly / tango),
+# - theme: a built-in Pygments theme name (e.g. monokai / default / emacs / friendly / tango)
 theme = "monokai"
 
-[general.syntax.styles] 
-# - styles: pygments token 名 → rich 样式. token 名如 Keyword / Name.Function / String.Doc.
-# 以下键值对的键值需要写Pygment自带的Token，自创的会默认不显示，
+[general.syntax.styles]
+# - styles: Pygments token name → Rich style. Token names such as Keyword / Name.Function / String.Doc.
+# Keys must be real Pygments tokens; made-up ones are hidden by default.
 "Comment.Special" = "bold #5C6370"
 "Comment" = "#5C6370"
 "String.Doc" = "italic #5C6370"
 "String" = "#98C379"
 ...
 
-# 主题内为某个异常覆盖文案
-[theme."tsuntere".exceptions.NameError]
-template = '小笨蛋, 才, 才不会告诉你这个“{name}”没定义呢, 哼╯^╰'
+# Override the message for a specific exception inside a theme
+[theme."tsundere".exceptions.NameError]
+template = 'You dummy! I-I would never tell you that "{name}" is not defined. Hmph ╯^╰'
 ```
 
+### Themes
 
-### 主题
+The configuration merges in three layers, **highest priority first**:
 
-配置分三层合并, **优先级从高到低**: 
-
-1. **用户配置**(`tsuntrack.toml` / 环境变量指定文件 / `~/.config/...`)——直接覆盖下面任何内容
-2. **主题覆盖层**(`[theme."主题名".*]`)——按 `[general] theme` 选中的主题覆盖基础配置
-3. **基础配置**(`defaults.toml` 中除 `[theme.*]` 外的部分)——所有主题共用, `exceptions.default` 兜底
+1. **User config** (`tsuntrack.toml` / file specified by the env var / `~/.config/...`) — directly overrides anything below
+2. **Theme override layer** (`[theme."theme-name".*]`) — overrides the base config according to the theme selected by `[general] theme`
+3. **Base config** (the parts of `defaults.toml` other than `[theme.*]`) — shared by all themes, with `exceptions.default` as the fallback
 
 ```toml
-# 1) 切换内置主题
+# 1) Switch built-in themes
 [general]
-theme = "傲娇"
+theme = "tsundere"
 
-# 2) 直接覆盖任意配置
+# 2) Override any config directly
 [exceptions.NameError]
-template = '我的自定义文案: {name}'
+template = 'My custom message: {name}'
 
-# 3) 自定义主题(在自己配置里加一段 [theme."名字"...] 即可)
+# 3) Custom themes (just add a [theme."name"...] section to your own config)
 [general]
 theme = "我的主题"
 
 [theme."我的主题".exceptions.NameError]
-template = '我的主题文案: {name}'
+template = 'My theme message: {name}'
 ```
 
-### 占位符
+### Placeholders
 
-| 占位符 | 含义 | 示例 |
+| Placeholder | Meaning | Example |
 | --- | --- | --- |
-| `{name}` | 变量名 / 属性名 / 模块名 / 键名(NameError、AttributeError、ModuleNotFoundError、KeyError 等) | `some_undefined_name` |
-| `{message}` | 异常自带的消息文本 | `division by zero` |
-| `{exc_type}` | 异常类型名 | `NameError` |
-| `{filename}` | 出错文件路径(最内层栈帧) | `C:\demo\app.py` |
-| `{lineno}` | 出错行号 | `8` |
-| `{func_name}` | 出错函数名 | `level_1` |
-| `{module}` | 出错模块名 | `app` |
+| `{name}` | Variable / attribute / module / key name (NameError, AttributeError, ModuleNotFoundError, KeyError, etc.) | `some_undefined_name` |
+| `{message}` | The exception's own message text | `division by zero` |
+| `{exc_type}` | Exception type name | `NameError` |
+| `{filename}` | Path of the file where the error occurred (innermost stack frame) | `C:\demo\app.py` |
+| `{lineno}` | Line number of the error | `8` |
+| `{func_name}` | Name of the function where the error occurred | `level_1` |
+| `{module}` | Name of the module where the error occurred | `app` |
 
-#### 自定义占位符(`[extra]`)
+#### Custom placeholders (`[extra]`)
 
-可在用户配置或主题中添加 `[extra]` 段，定义任意额外占位符：
+You can add an `[extra]` section to your user config or a theme to define arbitrary extra placeholders:
 
 ```toml
-# tsuntrack.toml(或环境变量指定的配置)
+# tsuntrack.toml (or the config specified by the environment variable)
 [extra]
 service = "order-api"
 env = "production"
@@ -144,31 +166,30 @@ env = "production"
 
 ```toml
 [theme."neko".exceptions.default]
-template = '主人, {service} 在 {env} 环境出错了: {message}, 人家会好好处理的!'
+template = 'Master, {service} failed in the {env} environment ┭┮﹏┭┮: {message}. Leave it to me!'
 ```
 
-输出：`主人, order-api 在 production 环境出错了: ...`
+Output: `Master, order-api failed in production ┭┮﹏┭┮: ...`
 
+- Keys in `[extra]` override built-in fields when they share a name with one in `[general]`
+- The theme layer works the same way: `[theme."X".extra]` lets you define different placeholders per theme
+- You can also call it from code: `formatter.format_message(exc_type, exc_value, tb, cfg, extra={"service": "x"})`
 
-- `[extra]` 的键与`[general]`中同名时覆盖内置字段
-- 主题层同样生效：`[theme."X".extra]` 可按主题定义不同占位符
-- 也可以从代码调用：`formatter.format_message(exc_type, exc_value, tb, cfg, extra={"service": "x"})`
-
-### 关闭
+### Disabling
 
 ```toml
 [general]
 enabled = false
 ```
 
-放在任意优先级的配置文件中即可全局关闭(钩子不会被安装). 
+Put this in a config file at any priority level to disable globally (the hooks will not be installed).
 
-## 已知限制
+## Known Limitations
 
-- `sys.unraisablehook` 暂未接管
-- `asyncio` 侵入全局 policy, 对于`uvloop`只好先包装
- > 若其他库也替换了 sys.excepthook，可能会静默覆盖
-- `python -S`(不加载 site)等模式下 `.pth` 不会被执行, 需手动 `tsuntrack.install()`
+- `sys.unraisablehook` is not handled yet
+- `asyncio` intrudes into the global policy; for `uvloop` we can only wrap it for now
+  > If another library also replaces `sys.excepthook`, it may silently override this one
+- In modes such as `python -S` (which doesn't load `site`), `.pth` files are not executed, so you need to call `tsuntrack.install()` manually
 
 ## License
 
