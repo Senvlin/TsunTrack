@@ -17,5 +17,5 @@ def test_auto_install_handles_install_failure(monkeypatch, capsys):
     importlib.import_module("tsuntrack.sitecustomize")
 
     err = capsys.readouterr().err
-    assert "自动安装失败" in err
+    assert "auto-install failed" in err
     assert "install boom" in err
