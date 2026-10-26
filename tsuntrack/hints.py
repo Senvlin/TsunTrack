@@ -10,6 +10,7 @@
 
 from __future__ import annotations
 
+import builtins
 import difflib
 from typing import Any
 
@@ -44,7 +45,7 @@ def _did_you_mean(
             frame = frame.tb_frame
             candidates.update(frame.f_locals)
             candidates.update(frame.f_globals)
-        candidates.update(dir(__builtins__))
+        candidates.update(dir(builtins))
         matches = difflib.get_close_matches(name, candidates, n=1)
         return matches[0] if matches else ""
 
@@ -85,6 +86,8 @@ def build_hint(
         ctx["pip_name"] = _pip_name(ctx["name"], cfg)
     if "did_you_mean" in template:
         suggestion = _did_you_mean(exc_type, exc_value)
-        ctx["did_you_mean"] = suggestion or ""
+        if not suggestion:
+            return None
+        ctx["did_you_mean"] = suggestion
 
     return template.format_map(_SafeDict(ctx))
